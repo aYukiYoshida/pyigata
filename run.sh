@@ -79,7 +79,13 @@ else
     logger 0 "input=${input}"
     cd ${DIRECTORY}
     if [ ${FLG_S} -eq 1 ];then
-        [ -e README.md ] && pandoc --from markdown --to rst README.md -o README.rst
+        which pandoc
+        if [ $? -eq 0 ];then
+            [ -e README.md ] && pandoc --from markdown --to rst README.md -o README.rst
+        else
+            logger 2 "The \"pandoc\" comand is needed."
+            abort
+        fi
         if [[ ${input} = build ]]||[[ ${input} = install ]]||[[ ${input} = test ]]||[[ ${input} = clean ]]||[[ ${input} = check ]]||[[ ${input} = sdist ]];then
             if [ ${FLG_B} -ne 1 ];then
                 python3 ./setup.py ${input}
