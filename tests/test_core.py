@@ -8,9 +8,11 @@ from .context import sample
 class TestCore(unittest.TestCase):
 ###-----------------------------------------------------------------------
     ###-------------------------------------------------------------------
-    def test_thoughts(self):
+    def test_pkg_name(self):
     ###-------------------------------------------------------------------
-        self.assertIsNone(sample.pkg_name())
+        loglv = 0
+        common = sample.Common(loglv=loglv)
+        self.assertIsNone(sample.pkg_name(common))
 
 
 ###-----------------------------------------------------------------------
