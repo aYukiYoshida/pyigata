@@ -2,11 +2,13 @@
 
 from .common import Common, Help
 
-def get_hmm():
-    """Get a thought."""
-    return 'hmmm...'
+###-----------------------------------------------------------------------
+def get_pkg_name():
+###-----------------------------------------------------------------------
+    return __package__
 
 
-def hmm():
-    """Contemplation..."""
-    print(get_hmm())
+###-----------------------------------------------------------------------
+def pkg_name(helper : Help):
+###-----------------------------------------------------------------------
+    helper.logger('PACKAGE NAME = {0}'.format(get_pkg_name()),1)

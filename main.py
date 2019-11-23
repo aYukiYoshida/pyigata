@@ -14,6 +14,6 @@ if __name__ == '__main__':
     loglv,test_flg = helper.parser()
 
     if test_flg:
-        pass
+        sys.exit(sample.pkg_name(helper))
     else:
         helper.abort('Please input command !!')
