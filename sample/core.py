@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from .common import Common, Help
+from .common import Common
 
 ###-----------------------------------------------------------------------
 def get_pkg_name():
@@ -9,6 +9,6 @@ def get_pkg_name():
 
 
 ###-----------------------------------------------------------------------
-def pkg_name(helper : Help):
+def pkg_name(comm : Common):
 ###-----------------------------------------------------------------------
-    helper.logger('PACKAGE NAME = {0}'.format(get_pkg_name()),1)
+    comm.logger('PACKAGE NAME = {0}'.format(get_pkg_name()),1)
