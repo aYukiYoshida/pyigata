@@ -14,27 +14,27 @@ If you want to learn more about `setup.py` files, check out [this repository](ht
 
 * build
     ```
-    % ./run.sh --setup build
+    % ./setup.sh build
     ```
 * install
     ```
-    % ./run.sh --setup install
+    % ./setup.sh install
     ```
 * unit test
     ```
-    % ./run.sh --setup test
+    % ./setup.sh test
     ```
 * clean
     ```
-    % ./run.sh --setup clean
+    % ./setup.sh clean
     ```
 * check
     ```
-    % ./run.sh --setup check
+    % ./setup.sh check
     ```
 * generate package
     ```
-    % ./run.sh --setup sdist
+    % ./setup.sh sdist
     ```
     The package is generated in dist/
 
