@@ -48,7 +48,6 @@ abort(){
 ################################################################################
 ## OPTION
 ################################################################################
-FLG_S=0
 FLG_B=0
 
 GETOPT=`getopt -q -o husd --long help,usage,setup,debug -- "$@"` ; [ $? != 0 ] && abort InvalidOption
@@ -62,7 +61,6 @@ eval set -- "$GETOPT"
 while true ;do
     case $1 in
         -h|--help|-u|--usage) usage ;;
-        -s|--setup) FLG_S=1; shift  ;;
         -d|--debug) logLevelCriteria=0; FLG_B=1; shift;;
         --) shift ; break ;;
         *) abort InvalidOption ;;
@@ -78,30 +76,22 @@ else
     input=$@
     logger 0 "input=${input}"
     cd ${DIRECTORY}
-    if [ ${FLG_S} -eq 1 ];then
-        which pandoc
-        if [ $? -eq 0 ];then
-            [ -e README.md ] && pandoc --from markdown --to rst README.md -o README.rst
-        else
-            logger 2 "The \"pandoc\" comand is needed."
-            abort
-        fi
-        if [[ ${input} = build ]]||[[ ${input} = install ]]||[[ ${input} = test ]]||[[ ${input} = clean ]]||[[ ${input} = check ]]||[[ ${input} = sdist ]];then
-            if [ ${FLG_B} -ne 1 ];then
-                python3 ./setup.py ${input}
-                rm -rf README.rst
-            else
-                logger 0 "valid input for setup = ${input}"
-            fi
-        else
-            abort InvalidCommand
-        fi
+    which pandoc 2>&1 > /dev/null
+    if [ $? -eq 0 ];then
+        [ -e README.md ] && pandoc --from markdown --to rst README.md -o README.rst
     else
+        logger 2 "The \"pandoc\" comand is needed."
+        abort
+    fi
+    if [[ ${input} = build ]]||[[ ${input} = install ]]||[[ ${input} = test ]]||[[ ${input} = clean ]]||[[ ${input} = check ]]||[[ ${input} = sdist ]];then
         if [ ${FLG_B} -ne 1 ];then
-            python3 ./main.py "$@"
+            python3 ./.setup.py ${input}
         else
-            logger 0 "main.py is run"
+            logger 0 "valid input for setup = ${input}"
         fi
+        rm -rf README.rst
+    else
+        abort InvalidCommand
     fi
 fi
 
