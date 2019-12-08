@@ -44,7 +44,7 @@ abort(){
     local evt=$1
     case ${evt} in
         "ExceededCommand") local message="Input commands were exceeded !!" ;;
-        "LackingCommand") local message="Input command was lacking !!" ;;
+        "LackingCommand")  local message="Input command was lacking !!" ;;
         "InvalidCommand")  local message="Invalid input command !!" ;;
         "InvalidOption")   local message="Invalid input option !!" ;;
         *)                 local message="Abort !!" ;;
@@ -65,6 +65,7 @@ rename(){
             mv sample ${name}
             sed -i "/name=/s/sample/${name}/" .setup.py
             sed -i "s/import sample/import ${name}/g;s/sample\./${name}\./g" main.py
+            sed -i "/pkg_dir/s/sample/${name}/g" ${name}/core.py
             for test_file in tests/*.py;do
                 sed -i "s/import sample/import ${name}/g" ${test_file}
                 sed -i "s/sample\./${name}\./g" ${test_file}

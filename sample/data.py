@@ -4,7 +4,7 @@ import os
 import inspect
 import pandas as pd
 
-from .common import Common
+from .core import Common
 
 
 ###-----------------------------------------------------------------------

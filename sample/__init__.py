@@ -1,3 +1,1 @@
-from .core   import pkg_name
-from .common import Common, Help
-from .data   import Reader
+from .core import pkg_name, Common, Help
