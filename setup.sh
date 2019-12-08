@@ -64,7 +64,7 @@ rename(){
             logger 1 "Rename target to ${name}"
             mv sample ${name}
             sed -i "/name=/s/sample/${name}/" .setup.py
-            sed -i "s/import sample/import ${name}/g" main.py
+            sed -i "s/import sample/import ${name}/g;s/sample\./${name}\./g" main.py
             for test_file in tests/*.py;do
                 sed -i "s/import sample/import ${name}/g" ${test_file}
                 sed -i "s/sample\./${name}\./g" ${test_file}
