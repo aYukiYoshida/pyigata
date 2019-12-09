@@ -6,6 +6,7 @@ import matplotlib._color_data as __mcd
 import seaborn as __sns
 from box import Box as __box
 
+from .core import Common
 
 ###-----------------------------------------------------------------------
 ### DEFAULT PARAMETERS
@@ -211,7 +212,7 @@ def configure_figure(
 
 
 ###-----------------------------------------------------------------------
-class PlotParameters(object):
+class Parameters(Common):
 ###-----------------------------------------------------------------------
     ###-------------------------------------------------------------------
     ### CLASS VARIABLES
@@ -234,3 +235,8 @@ class PlotParameters(object):
     masize = get_masize()
     igfont = get_igfont()
     colors = get_color() 
+
+    ###-------------------------------------------------------------------
+    def __init__(self,loglv: int = 1) -> None:
+    ###-------------------------------------------------------------------
+        super().__init__(loglv=1)
