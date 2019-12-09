@@ -87,55 +87,61 @@ def get_labfsize() -> float:
 
 
 ###-----------------------------------------------------------------------
-def get_legfsize(self) -> float:
+def get_legfsize() -> float:
 ###-----------------------------------------------------------------------
     return legfsize
 
 
 ###-----------------------------------------------------------------------
-def get_tckfsize(self) -> float:
+def get_tckfsize() -> float:
 ###-----------------------------------------------------------------------
     return tckfsize
 
 
 ###-----------------------------------------------------------------------
-def get_calign(self) -> str:
+def get_calign() -> str:
 ###-----------------------------------------------------------------------
     return calign
 
 
 ###-----------------------------------------------------------------------
-def get_valign(self) -> str:
+def get_valign() -> str:
 ###-----------------------------------------------------------------------
     return valign
 
 
 ###-----------------------------------------------------------------------
-def get_halign(self) -> str:
+def get_halign() -> str:
 ###-----------------------------------------------------------------------
     return halign
 
 
 ###-----------------------------------------------------------------------
-def get_lstyle(self) -> str:
+def get_lstyle() -> str:
 ###-----------------------------------------------------------------------
     return lstyle
 
 
 ###-----------------------------------------------------------------------
-def get_lwidth(self) -> float:
+def get_lwidth() -> float:
 ###-----------------------------------------------------------------------
     return lwidth
 
 
 ###-----------------------------------------------------------------------
-def get_pltfmt(self) -> str:
+def get_marker() -> str:
+###-----------------------------------------------------------------------
+    return marker
+
+
+###-----------------------------------------------------------------------
+def get_pltfmt() -> str:
 ###-----------------------------------------------------------------------
     return pltfmt
 
 
 ###-----------------------------------------------------------------------
-def get_masize(self) -> float:
+def get_masize() -> float:
 ###-----------------------------------------------------------------------
     return masize
 
@@ -202,3 +208,29 @@ def configure_figure(
                 wspace=grid_ws, hspace=grid_hs)
     # ax = fig.add_subplot(grd[0,0])
     return fig,grd
+
+
+###-----------------------------------------------------------------------
+class PlotParameters(object):
+###-----------------------------------------------------------------------
+    ###-------------------------------------------------------------------
+    ### CLASS VARIABLES
+    ###-------------------------------------------------------------------
+    figsize = get_figsize()
+    gridnum = get_gridnum()
+    gridsize = get_gridsize()
+    gridspace = get_gridspace()
+    fsize = get_fsize()
+    labfsize = get_labfsize()
+    legfsize = get_legfsize()
+    tckfsize = get_tckfsize()
+    calign = get_calign()
+    valign = get_valign()
+    halign = get_halign()
+    lstyle = get_lstyle()
+    lwidth = get_lwidth()
+    marker = get_marker()
+    pltfmt = get_pltfmt()
+    masize = get_masize()
+    igfont = get_igfont()
+    colors = get_color() 
