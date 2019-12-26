@@ -204,7 +204,7 @@ def configure_figure(
         grid_t  :float = GRIDSIZE['top'],
         grid_ws :float = GRIDSPACE[0],
         grid_hs :float = GRIDSPACE[1],
-        ) -> (_plt.figure, _union[_np.ndarray, _mpl.axes.Subplot]):
+        ) -> (_mpl.figure.Figure, _union[_np.ndarray, _mpl.axes.Subplot]):
 ###-----------------------------------------------------------------------
     fig = _plt.figure(figsize=(figsize_x, figsize_y))
     grd = _grs.GridSpec(grid_num_v,grid_num_h)
