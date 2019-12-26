@@ -1,214 +1,237 @@
 # -*- coding: utf-8 -*- 
 
-import matplotlib.pyplot as __plt 
-import matplotlib.gridspec as __grs
-import matplotlib._color_data as __mcd
-import seaborn as __sns
-from box import Box as __box
+import matplotlib as _mpl
+import matplotlib.pyplot as _plt 
+import matplotlib.gridspec as _grs
+import matplotlib._color_data as _mcd
+import numpy as _np
+import seaborn as _sns
+from box import Box as _box
+from typing import Union as _union
 
 from .core import Common
 
 ###-----------------------------------------------------------------------
 ### DEFAULT PARAMETERS
 ###-----------------------------------------------------------------------
-figsize = [ 12, 6 ]                # figure size (x,y)
-gridnum = [  1, 1 ]                # grid number (v,h)
-gridsize = { 'left': 0.1, 'right': 0.95, 
+FIGSIZE = [ 12, 6 ]                # figure size (x,y)
+GRIDNUM = [  1, 1 ]                # grid number (v,h)
+GRIDSIZE = { 'left': 0.1, 'right': 0.95, 
              'bottom': 0.2, 'top': 0.95 }
-gridspace = [ 0.03, 0.02 ]         # grid space (w,h)
-fsize = 25.0                       # font size
-labfsize = fsize*0.8               # font size for label
-legfsize = fsize*0.5               # font size for legend
-tckfsize = fsize                   # font size for ticks
-calign = 'center'                  # common alignment
-valign = 'center'                  # vertival alignment
-halign = 'center'                  # horizontal alignment
-lstyle = 'solid'                   # line style
-lwidth = 2.0                       # line width
-marker = 'o'                       # marker
-pltfmt = ','                       # format for plot with errors
-masize = 3.0                       # marker size
-igfont = {'family':'IPAexGothic'}
-color = __box({ 
-    'blue'      : __sns.color_palette('muted').as_hex()[0],
-    'orange'    : __sns.color_palette('muted').as_hex()[1],
-    'green'     : __sns.color_palette('muted').as_hex()[2],
-    'red'       : __sns.color_palette('muted').as_hex()[3],
-    'violet'    : __sns.color_palette('muted').as_hex()[4], 
-    'brown'     : __sns.color_palette('muted').as_hex()[5],
-    'pink'      : __sns.color_palette('muted').as_hex()[6],
-    'gray'      : __sns.color_palette('muted').as_hex()[7],
-    'ocher'     : __sns.color_palette('muted').as_hex()[8],
-    'cyan'      : __sns.color_palette('muted').as_hex()[9],
-    'white'     : __mcd.CSS4_COLORS['white'],
-    'black'     : __mcd.CSS4_COLORS['black'],
-    'yellow'    : __mcd.CSS4_COLORS['gold'],
-    'peach'     : __sns.color_palette("husl", 8).as_hex()[0],
-    'emerald'   : __sns.color_palette("husl", 8).as_hex()[4],
-    'turquoise' : __sns.color_palette("husl", 8).as_hex()[5],
-    'purple'    : __sns.color_palette("husl", 8).as_hex()[6], 
-    'magenta'   : __sns.color_palette("husl", 8).as_hex()[7],
+GRIDSPACE = [ 0.03, 0.02 ]         # grid space (w,h)
+FSIZE = 25.0                       # font size
+LABFSIZE = FSIZE*0.8               # font size for label
+LEGFSIZE = FSIZE*0.5               # font size for legend
+TCKFSIZE = FSIZE                   # font size for ticks
+CALIGN = 'center'                  # common alignment
+VALIGN = 'center'                  # vertival alignment
+HALIGN = 'center'                  # horizontal alignment
+LSTYLE = 'solid'                   # line style
+LWIDTH = 2.0                       # line width
+MARKER = 'o'                       # marker
+PLTFMT = ','                       # format for plot with errors
+MASIZE = 3.0                       # marker size
+IGFONT = {'family':'IPAexGothic'}
+COLORS = _box({ 
+    'blue'      : _sns.color_palette('muted').as_hex()[0],
+    'orange'    : _sns.color_palette('muted').as_hex()[1],
+    'green'     : _sns.color_palette('muted').as_hex()[2],
+    'red'       : _sns.color_palette('muted').as_hex()[3],
+    'violet'    : _sns.color_palette('muted').as_hex()[4], 
+    'brown'     : _sns.color_palette('muted').as_hex()[5],
+    'pink'      : _sns.color_palette('muted').as_hex()[6],
+    'gray'      : _sns.color_palette('muted').as_hex()[7],
+    'ocher'     : _sns.color_palette('muted').as_hex()[8],
+    'cyan'      : _sns.color_palette('muted').as_hex()[9],
+    'white'     : _mcd.CSS4_COLORS['white'],
+    'black'     : _mcd.CSS4_COLORS['black'],
+    'yellow'    : _mcd.CSS4_COLORS['gold'],
+    'peach'     : _sns.color_palette("husl", 8).as_hex()[0],
+    'emerald'   : _sns.color_palette("husl", 8).as_hex()[4],
+    'turquoise' : _sns.color_palette("husl", 8).as_hex()[5],
+    'purple'    : _sns.color_palette("husl", 8).as_hex()[6], 
+    'magenta'   : _sns.color_palette("husl", 8).as_hex()[7],
 })
 
 
 ###-----------------------------------------------------------------------
 def get_figsize() -> float:
 ###-----------------------------------------------------------------------
-    return figsize
+    return FIGSIZE
 
 
 ###-----------------------------------------------------------------------
 def get_gridnum() -> float:
 ###-----------------------------------------------------------------------
-    return gridnum
+    return GRIDNUM
 
 
 ###-----------------------------------------------------------------------
 def get_gridsize() -> float:
 ###-----------------------------------------------------------------------
-    return gridsize
+    return GRIDSIZE
 
 
 ###-----------------------------------------------------------------------
 def get_gridspace() -> float:
 ###-----------------------------------------------------------------------
-    return gridspace
+    return GRIDSPACE
 
 
 ###-----------------------------------------------------------------------
 def get_fsize() -> float:
 ###-----------------------------------------------------------------------
-    return fsize
+    return FSIZE
 
 
 ###-----------------------------------------------------------------------
 def get_labfsize() -> float:
 ###-----------------------------------------------------------------------
-    return labfsize
+    return LABFSIZE
 
 
 ###-----------------------------------------------------------------------
 def get_legfsize() -> float:
 ###-----------------------------------------------------------------------
-    return legfsize
+    return LEGFSIZE
 
 
 ###-----------------------------------------------------------------------
 def get_tckfsize() -> float:
 ###-----------------------------------------------------------------------
-    return tckfsize
+    return TCKFSIZE
 
 
 ###-----------------------------------------------------------------------
 def get_calign() -> str:
 ###-----------------------------------------------------------------------
-    return calign
+    return CALIGN
 
 
 ###-----------------------------------------------------------------------
 def get_valign() -> str:
 ###-----------------------------------------------------------------------
-    return valign
+    return VALIGN
 
 
 ###-----------------------------------------------------------------------
 def get_halign() -> str:
 ###-----------------------------------------------------------------------
-    return halign
+    return HALIGN
 
 
 ###-----------------------------------------------------------------------
 def get_lstyle() -> str:
 ###-----------------------------------------------------------------------
-    return lstyle
+    return LSTYLE
 
 
 ###-----------------------------------------------------------------------
 def get_lwidth() -> float:
 ###-----------------------------------------------------------------------
-    return lwidth
+    return LWIDTH
 
 
 ###-----------------------------------------------------------------------
 def get_marker() -> str:
 ###-----------------------------------------------------------------------
-    return marker
+    return MARKER
 
 
 ###-----------------------------------------------------------------------
 def get_pltfmt() -> str:
 ###-----------------------------------------------------------------------
-    return pltfmt
+    return PLTFMT
 
 
 ###-----------------------------------------------------------------------
 def get_masize() -> float:
 ###-----------------------------------------------------------------------
-    return masize
+    return MASIZE
 
 
 ###-----------------------------------------------------------------------
 def get_igfont() -> dict:
 ###-----------------------------------------------------------------------
-    return igfont
+    return IGFONT
 
 
 ###-----------------------------------------------------------------------
-def get_color() -> dict:
+def get_colors() -> dict:
 ###-----------------------------------------------------------------------
-    return color
+    return COLORS
 
 
 ###-----------------------------------------------------------------------
 def set_rcparams() -> None:
 ###-----------------------------------------------------------------------
-    __plt.rcParams['font.family'] = 'Times New Roman'
-    __plt.rcParams['mathtext.fontset'] = 'cm'
-    __plt.rcParams['mathtext.rm'] = 'serif'
-    __plt.rcParams['axes.titleweight'] = 'bold'
-    # __plt.rcParams['axes.labelweight'] = 'bold'
-    __plt.rcParams['axes.linewidth'] = lwidth
-    __plt.rcParams['grid.linestyle'] = 'solid'
-    __plt.rcParams['grid.linewidth'] = 1.0
-    __plt.rcParams['grid.alpha'] = 0.2
-    __plt.rcParams['xtick.major.size'] = 8
-    __plt.rcParams['xtick.minor.size'] = 5
-    __plt.rcParams['xtick.major.width'] = lwidth
-    __plt.rcParams['xtick.minor.width'] = lwidth
-    __plt.rcParams['xtick.major.pad'] = 5
-    __plt.rcParams['ytick.major.size'] = 8
-    __plt.rcParams['xtick.top'] = True
-    __plt.rcParams['ytick.minor.size'] = 5
-    __plt.rcParams['ytick.major.width'] = lwidth
-    __plt.rcParams['ytick.minor.width'] = lwidth
-    __plt.rcParams['ytick.major.pad'] = 5
-    __plt.rcParams['xtick.direction'] = 'in'
-    __plt.rcParams['ytick.direction'] = 'in'
-    __plt.rcParams['xtick.labelsize'] = labfsize
-    __plt.rcParams['ytick.labelsize'] = labfsize
-    __plt.rcParams['ytick.right'] = True
+    _plt.rcParams['font.family'] = 'Times New Roman'
+    _plt.rcParams['mathtext.fontset'] = 'cm'
+    _plt.rcParams['mathtext.rm'] = 'serif'
+    _plt.rcParams['axes.titleweight'] = 'bold'
+    # _plt.rcParams['axes.labelweight'] = 'bold'
+    _plt.rcParams['axes.linewidth'] = LWIDTH
+    _plt.rcParams['grid.linestyle'] = 'solid'
+    _plt.rcParams['grid.linewidth'] = 1.0
+    _plt.rcParams['grid.alpha'] = 0.2
+    _plt.rcParams['xtick.major.size'] = 8
+    _plt.rcParams['xtick.minor.size'] = 5
+    _plt.rcParams['xtick.major.width'] = LWIDTH
+    _plt.rcParams['xtick.minor.width'] = LWIDTH
+    _plt.rcParams['xtick.major.pad'] = 5
+    _plt.rcParams['ytick.major.size'] = 8
+    _plt.rcParams['xtick.top'] = True
+    _plt.rcParams['ytick.minor.size'] = 5
+    _plt.rcParams['ytick.major.width'] = LWIDTH
+    _plt.rcParams['ytick.minor.width'] = LWIDTH
+    _plt.rcParams['ytick.major.pad'] = 5
+    _plt.rcParams['xtick.direction'] = 'in'
+    _plt.rcParams['ytick.direction'] = 'in'
+    _plt.rcParams['xtick.labelsize'] = LABFSIZE
+    _plt.rcParams['ytick.labelsize'] = LABFSIZE
+    _plt.rcParams['ytick.right'] = True
 
 
 ###-----------------------------------------------------------------------
 def configure_figure(
-        figsize_x :int = figsize[0],
-        figsize_y :int = figsize[1],
-        grid_num_v :int = gridnum[0],
-        grid_num_h :int = gridnum[1],
-        grid_l  :float = gridsize['left'],
-        grid_r  :float = gridsize['right'],
-        grid_b  :float = gridsize['bottom'],
-        grid_t  :float = gridsize['top'],
-        grid_ws :float = gridspace[0],
-        grid_hs :float = gridspace[1],
-        ) -> (__plt.figure, __grs.GridSpec):
+        figsize_x :int = FIGSIZE[0],
+        figsize_y :int = FIGSIZE[1],
+        grid_num_v :int = GRIDNUM[0],
+        grid_num_h :int = GRIDNUM[1],
+        grid_l  :float = GRIDSIZE['left'],
+        grid_r  :float = GRIDSIZE['right'],
+        grid_b  :float = GRIDSIZE['bottom'],
+        grid_t  :float = GRIDSIZE['top'],
+        grid_ws :float = GRIDSPACE[0],
+        grid_hs :float = GRIDSPACE[1],
+        ) -> (_mpl.figure.Figure, _union[_np.ndarray, _mpl.axes.Subplot]):
 ###-----------------------------------------------------------------------
-    fig = __plt.figure(figsize=(figsize_x, figsize_y))
-    grd = __grs.GridSpec(grid_num_v,grid_num_h)
+    fig = _plt.figure(figsize=(figsize_x, figsize_y))
+    grd = _grs.GridSpec(grid_num_v,grid_num_h)
     grd.update(left=grid_l, right=grid_r, bottom=grid_b, top=grid_t,
                 wspace=grid_ws, hspace=grid_hs)
-    # ax = fig.add_subplot(grd[0,0])
-    return fig,grd
+
+    if grid_num_v == 1 and grid_num_h == 1:
+        ax = fig.add_subplot(grd[0,0])
+    elif (grid_num_v > 1 and grid_num_h == 1):
+        ax = list()
+        for v in range(grid_num_v):
+            ax.append(fig.add_subplot(grd[v,0]))
+        ax = _np.array(ax)
+    elif (grid_num_v == 1 and grid_num_h > 1):
+        ax = list()
+        for h in range(grid_num_h):
+            ax.append(fig.add_subplot(grd[0,h]))
+        ax = _np.array(ax)
+    elif (grid_num_v > 1 and grid_num_h > 1):
+        ax_parent = list()
+        for h in range(grid_num_h):
+            ax_child = list()
+            for v in range(grid_num_v):
+                ax_child.append(fig.add_subplot(grd[v,h]))
+            ax_parent.append(ax_child)
+        ax = _np.array(ax_parent)
+    return fig, ax
 
 
 ###-----------------------------------------------------------------------
@@ -234,9 +257,9 @@ class Parameters(Common):
     pltfmt = get_pltfmt()
     masize = get_masize()
     igfont = get_igfont()
-    colors = get_color() 
+    colors = get_colors() 
 
     ###-------------------------------------------------------------------
     def __init__(self,loglv: int = 1) -> None:
     ###-------------------------------------------------------------------
-        super().__init__(loglv=1)
+        super().__init__(loglv=loglv)
