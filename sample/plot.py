@@ -2,7 +2,6 @@
 
 import matplotlib as _mpl
 import matplotlib.pyplot as _plt 
-import matplotlib.gridspec as _grs
 import matplotlib._color_data as _mcd
 import numpy as _np
 import seaborn as _sns
@@ -206,31 +205,12 @@ def configure_figure(
         grid_hs :float = GRIDSPACE[1],
         ) -> (_mpl.figure.Figure, _union[_np.ndarray, _mpl.axes.Subplot]):
 ###-----------------------------------------------------------------------
-    fig = _plt.figure(figsize=(figsize_x, figsize_y))
-    grd = _grs.GridSpec(grid_num_v,grid_num_h)
-    grd.update(left=grid_l, right=grid_r, bottom=grid_b, top=grid_t,
-                wspace=grid_ws, hspace=grid_hs)
-
-    if grid_num_v == 1 and grid_num_h == 1:
-        ax = fig.add_subplot(grd[0,0])
-    elif (grid_num_v > 1 and grid_num_h == 1):
-        ax = list()
-        for v in range(grid_num_v):
-            ax.append(fig.add_subplot(grd[v,0]))
-        ax = _np.array(ax)
-    elif (grid_num_v == 1 and grid_num_h > 1):
-        ax = list()
-        for h in range(grid_num_h):
-            ax.append(fig.add_subplot(grd[0,h]))
-        ax = _np.array(ax)
-    elif (grid_num_v > 1 and grid_num_h > 1):
-        ax_parent = list()
-        for h in range(grid_num_h):
-            ax_child = list()
-            for v in range(grid_num_v):
-                ax_child.append(fig.add_subplot(grd[v,h]))
-            ax_parent.append(ax_child)
-        ax = _np.array(ax_parent)
+    fig,ax = _plt.subplots(grid_num_v,grid_num_h,figsize=(figsize_x, figsize_y))
+    fig.subplots_adjust(
+        left=grid_l, right=grid_r,
+        bottom=grid_b, top=grid_t,
+        wspace=grid_ws, hspace=grid_hs)
+    grd = fig.add_gridspec(grid_num_v,grid_num_h)
     return fig, ax
 
 
