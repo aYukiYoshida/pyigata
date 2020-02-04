@@ -205,7 +205,9 @@ def configure_figure(
         grid_hs :float = GRIDSPACE[1],
         ) -> (_mpl.figure.Figure, _union[_np.ndarray, _mpl.axes.Subplot]):
 ###-----------------------------------------------------------------------
-    fig,ax = _plt.subplots(grid_num_v,grid_num_h,figsize=(figsize_x, figsize_y))
+    fig,ax = _plt.subplots(grid_num_v,grid_num_h,
+                figsize=(figsize_x, figsize_y),
+                sharex='col',sharey='row')
     fig.subplots_adjust(
         left=grid_l, right=grid_r,
         bottom=grid_b, top=grid_t,
