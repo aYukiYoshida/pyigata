@@ -6,9 +6,9 @@ import matplotlib._color_data as _mcd
 import numpy as _np
 import seaborn as _sns
 from box import Box as _box
-from typing import Union as _union
 
 from .core import Common
+from .core import Union as _union
 
 ###-----------------------------------------------------------------------
 ### DEFAULT PARAMETERS
