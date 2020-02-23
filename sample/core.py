@@ -4,7 +4,7 @@ import os
 import sys
 import inspect
 from typing import Union
-
+from box import Box
 
 ###-----------------------------------------------------------------------
 class Common(object):
