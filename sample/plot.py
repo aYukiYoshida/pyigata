@@ -193,21 +193,27 @@ def set_rcparams() -> None:
 
 ###-----------------------------------------------------------------------
 def configure_figure(
-        figsize_x :int = FIGSIZE[0],
-        figsize_y :int = FIGSIZE[1],
-        grid_num_v :int = GRIDNUM[0],
-        grid_num_h :int = GRIDNUM[1],
-        grid_l  :float = GRIDSIZE['left'],
-        grid_r  :float = GRIDSIZE['right'],
-        grid_b  :float = GRIDSIZE['bottom'],
-        grid_t  :float = GRIDSIZE['top'],
-        grid_ws :float = GRIDSPACE[0],
-        grid_hs :float = GRIDSPACE[1],
+        figsize_x :int = FIGSIZE.x,
+        figsize_y :int = FIGSIZE.y,
+        grid_num_v :int = GRIDNUM.v,
+        grid_num_h :int = GRIDNUM.h,
+        grid_l  :float = GRIDSIZE.left,
+        grid_r  :float = GRIDSIZE.right,
+        grid_b  :float = GRIDSIZE.bottom,
+        grid_t  :float = GRIDSIZE.top,
+        grid_ws :float = GRIDSPACE.w,
+        grid_hs :float = GRIDSPACE.h,
+        sharex :bool = True,
+        sharey :bool = True
         ) -> (_mpl.figure.Figure, _union[_np.ndarray, _mpl.axes.Subplot]):
 ###-----------------------------------------------------------------------
+    if sharex:
+        sharex = 'col'
+    if sharey:
+        sharey = 'row'
     fig,ax = _plt.subplots(grid_num_v,grid_num_h,
                 figsize=(figsize_x, figsize_y),
-                sharex='col',sharey='row')
+                sharex=sharex,sharey=sharey)
     fig.subplots_adjust(
         left=grid_l, right=grid_r,
         bottom=grid_b, top=grid_t,
