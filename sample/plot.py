@@ -13,11 +13,10 @@ from .core import Union as _union
 ###-----------------------------------------------------------------------
 ### DEFAULT PARAMETERS
 ###-----------------------------------------------------------------------
-FIGSIZE = [ 12, 6 ]                # figure size (x,y)
-GRIDNUM = [  1, 1 ]                # grid number (v,h)
-GRIDSIZE = { 'left': 0.1, 'right': 0.95, 
-             'bottom': 0.2, 'top': 0.95 }
-GRIDSPACE = [ 0.03, 0.02 ]         # grid space (w,h)
+FIGSIZE = _box({'x':12, 'y':6})
+GRIDNUM = _box({'v':1, 'h':1})
+GRIDSIZE = _box({'left': 0.1, 'right': 0.95, 'bottom': 0.2, 'top': 0.95})
+GRIDSPACE = _box({'w':0.03, 'h':0.02})
 FSIZE = 25.0                       # font size
 LABFSIZE = FSIZE*0.8               # font size for label
 LEGFSIZE = FSIZE*0.5               # font size for legend
@@ -30,7 +29,7 @@ LWIDTH = 2.0                       # line width
 MARKER = 'o'                       # marker
 PLTFMT = ','                       # format for plot with errors
 MASIZE = 3.0                       # marker size
-IGFONT = {'family':'IPAexGothic'}
+IGFONT = _box({'family':'IPAexGothic'})
 COLORS = _box({ 
     'blue'      : _sns.color_palette('muted').as_hex()[0],
     'orange'    : _sns.color_palette('muted').as_hex()[1],
@@ -54,25 +53,25 @@ COLORS = _box({
 
 
 ###-----------------------------------------------------------------------
-def get_figsize() -> float:
+def get_figsize() -> _box:
 ###-----------------------------------------------------------------------
     return FIGSIZE
 
 
 ###-----------------------------------------------------------------------
-def get_gridnum() -> float:
+def get_gridnum() -> _box:
 ###-----------------------------------------------------------------------
     return GRIDNUM
 
 
 ###-----------------------------------------------------------------------
-def get_gridsize() -> float:
+def get_gridsize() -> _box:
 ###-----------------------------------------------------------------------
     return GRIDSIZE
 
 
 ###-----------------------------------------------------------------------
-def get_gridspace() -> float:
+def get_gridspace() -> _box:
 ###-----------------------------------------------------------------------
     return GRIDSPACE
 
@@ -150,13 +149,13 @@ def get_masize() -> float:
 
 
 ###-----------------------------------------------------------------------
-def get_igfont() -> dict:
+def get_igfont() -> _box:
 ###-----------------------------------------------------------------------
     return IGFONT
 
 
 ###-----------------------------------------------------------------------
-def get_colors() -> dict:
+def get_colors() -> _box:
 ###-----------------------------------------------------------------------
     return COLORS
 
