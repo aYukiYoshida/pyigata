@@ -3,7 +3,7 @@
 
 import sys
 
-import sample
+import src
 from absl import app
 from absl import flags
 
@@ -19,19 +19,13 @@ flags.DEFINE_enum('practice', None, ['a', 'b', 'c'], 'This is one of the command
 flags.DEFINE_enum('test', None, ['a', 'b', 'c'], 'This is one of the command. Test mode.')
 flags.DEFINE_enum('exercise', None, ['a', 'b', 'c'], 'This is one of the command. Exercise mode.')
 
-param_dict = sample.core.Box({
-    'command' : None,
-    'value' : None,
-    'nproc' : 4,
-})
-
 
 ###-----------------------------------------------------------------------
 def main(argv):
 ###-----------------------------------------------------------------------
     if flag_values.debug:
         flag_values.loglv = 0
-    common = sample.Common(flag_values.loglv)
+    common = src.util.Common(flag_values.loglv)
 
     command_flags_list = [ flag_values.practice, flag_values.test, flag_values.exercise ]
     if len([ command_flag for command_flag in command_flags_list if command_flag is not None]) == 1:

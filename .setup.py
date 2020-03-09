@@ -15,7 +15,7 @@ with open('requirements.txt') as f:
     install_requires = f.read().splitlines()
 
 setup(
-    name='sample',
+    name='src',
     version='0.1.0',
     description='igata for Python',
     long_description=readme,

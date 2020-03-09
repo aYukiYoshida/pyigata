@@ -2,12 +2,11 @@
 
 import pandas as _pd
 import numpy as _np
-from sklearn.preprocessing import _LabelEncoder
 
-from .core import inspect
-from .core import os
-from .core import Common
-from .core import Union as _union
+from ..util.common import inspect
+from ..util.common import os
+from ..util.common import Common
+from ..util.common import Union as _union
 
 
 ###-----------------------------------------------------------------------
@@ -59,21 +58,3 @@ class Editor(Manager):
     def __init__(self,loglv: int):
     ###-------------------------------------------------------------------
         super().__init__(loglv)
-
-
-###-----------------------------------------------------------------------
-def convert_categorical_to_onehot(array:_union[_np.ndarray,_pd.Series,_pd.DataFrame], classes_number:int=None) -> _np.ndarray:
-###-----------------------------------------------------------------------
-    if type(array) is _pd.Series or type(array) is _pd.DataFrame:
-        array = array.values
-    if classes_number is None:
-        classes_number = _np.unique(array)
-
-    return _np.squeeze(_np.eye(classes_number)[array.reshape(-1)])
-
-
-###-----------------------------------------------------------------------
-def convert_categorical_to_label(array:_union[_np.ndarray,_pd.Series], classes_number:int) -> _np.ndarray:
-###-----------------------------------------------------------------------
-    le = _LabelEncoder()
-    return le.fit_transform(array)

@@ -7,8 +7,8 @@ import numpy as _np
 import seaborn as _sns
 from box import Box as _box
 
-from .core import Common
-from .core import Union as _union
+from ..util.common import Common
+from ..util.common import Union as _union
 
 
 ###-----------------------------------------------------------------------
