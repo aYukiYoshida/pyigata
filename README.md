@@ -5,36 +5,38 @@
 ### 環境設定
 
 * 仮想環境準備
-    ```
+    ```shellscript
     % virtualenv venv
     % source ./venv/bin/activate
     % deactivate  # 仮想環境終了
     ```
+#### usage of setup script
+
 If you want to learn more about `setup.py` files, check out [this repository](https://github.com/kennethreitz/setup.py).
 
 * build
-    ```
-    % ./setup.sh build
+    ```shellscript
+    % ./setup.py build
     ```
 * install
-    ```
-    % ./setup.sh install
+    ```shellscript
+    % ./setup.py install
     ```
 * unit test
-    ```
-    % ./setup.sh test
+    ```shellscript
+    % ./setup.py test
     ```
 * clean
-    ```
-    % ./setup.sh clean
+    ```shellscript
+    % ./setup.py clean
     ```
 * check
-    ```
-    % ./setup.sh check
+    ```shellscript
+    % ./setup.py check
     ```
 * generate package
-    ```
-    % ./setup.sh sdist
+    ```shellscript
+    % ./setup.py sdist
     ```
     The package is generated in dist/
 
