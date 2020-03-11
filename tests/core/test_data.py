@@ -3,26 +3,30 @@
 import unittest
 from ..context import io 
 from ..context import sys
-from ..context import src
+from ..context import data
 
 
 ###-----------------------------------------------------------------------
 class TestData(unittest.TestCase):
 ###-----------------------------------------------------------------------
     ###-------------------------------------------------------------------
+    def setUp(self):
+    ###-------------------------------------------------------------------
+        self.reader = data.Reader(loglv=0)
+        self.captor = io.StringIO()
+        sys.stdout = self.captor
+
+
+    ###-------------------------------------------------------------------
     def test_common_type(self):
     ###-------------------------------------------------------------------
-        loglv = 0
-        reader = src.core.Reader(loglv=loglv)
-        self.assertIs(type(reader),src.core.Reader)
+        self.assertIs(type(self.reader),data.Reader)
 
 
     ###-------------------------------------------------------------------
     def test_readTestData(self):
     ###-------------------------------------------------------------------
-        loglv = 3
-        reader = src.core.Reader(loglv=loglv)
-        self.assertIs(type(reader.readTestData()),src.core.data._pd.DataFrame)
+        self.assertIs(type(self.reader.readTestData()),data._pd.DataFrame)
 
 
 ###-----------------------------------------------------------------------
