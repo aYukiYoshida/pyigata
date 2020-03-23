@@ -1,0 +1,21 @@
+# 許可するライセンスのリスト。以下のリストは例。
+allowed:
+  - Apache Software License
+  - BSD License
+  - MIT License
+  - BSD
+  - MIT
+
+# 許可するライセンス一覧にはないが、ライセンスに問題が無いことが確認できたライブラリ
+reviewed:
+  npm:
+    - hogehoge
+  pip:
+    - piyopiyo
+
+# チェック対象外のライブラリ
+ignored:
+  npm:
+    - my-app
+  pip:
+    - my-app
