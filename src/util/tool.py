@@ -43,7 +43,13 @@ def convert_categorical_to_onehot(array:_union[_np.ndarray,_pd.Series,_pd.DataFr
 
 
 ###-----------------------------------------------------------------------
-def convert_categorical_to_label(array:_union[_np.ndarray,_pd.Series], classes_number:int) -> _np.ndarray:
+def convert_categorical_to_label(
+        array:_union[list,_np.ndarray,_pd.Series],
+        label:_union[list,_np.ndarray,_pd.Series]=None) -> np.ndarray:
 ###-----------------------------------------------------------------------
     le = _LabelEncoder()
-    return le.fit_transform(array)
+    if label is not None:
+        le = le.fit(label)
+        return le.transform(array)
+    else:
+        return le.fit_transform(array)
