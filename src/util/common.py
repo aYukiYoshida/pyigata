@@ -10,8 +10,10 @@ from box import Box
 ###-----------------------------------------------------------------------
 ### GLOBAL VARIABLES
 ###-----------------------------------------------------------------------
-PKG_DIR = './src'
-OUT_DIR = './out'
+ROOT_DIR = './'
+PKG_DIR = os.path.join(ROOT_DIR, 'src')
+OUT_DIR = os.path.join(ROOT_DIR, 'out')
+DAT_DIR = os.path.join(ROOT_DIR, 'data')
 
 
 ###-----------------------------------------------------------------------
@@ -21,8 +23,6 @@ class Common(object):
     def __init__(self,loglv: int = 1) -> None:
     ###-------------------------------------------------------------------
         self.loglv = loglv
-        self.pkg_dir = PKG_DIR
-        self.out_dir = OUT_DIR
 
 
     ###-------------------------------------------------------------------
