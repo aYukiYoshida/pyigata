@@ -3,7 +3,7 @@
 import os
 import sys
 import inspect
-from typing import Union
+from typing import Union, List, Dict, Tuple
 from box import Box
 
 
@@ -17,7 +17,64 @@ DAT_DIR = os.path.join(ROOT_DIR, 'data')
 
 
 ###-----------------------------------------------------------------------
-class Common(object):
+class Log(object):
+###-----------------------------------------------------------------------
+    STATUS = {
+        0 : 'DEBUG',
+        1 : 'INFO',
+        2 : 'WARNING',
+        3 : 'ERROR' }
+
+
+    ###-------------------------------------------------------------------
+    def __init__(self,loglv: Union[int, str] = 1) -> None:
+    ###-------------------------------------------------------------------
+        if type(loglv) is str:
+            try:
+                loglv = list(self.STATUS.values()).index(loglv.upper())
+            except ValueError:
+                raise ValueError(f'loglv should be set to an integer between 0 and 3 or a one of '+', '.join(self.STATUS.values())+'.')
+        self.loglv: int = loglv
+
+
+    ###-------------------------------------------------------------------
+    def logger(self,string: str,level: int, frame=None) -> None:
+    ###-------------------------------------------------------------------
+        if not frame == None:
+            function_name = inspect.getframeinfo(frame)[2]
+            console_msg = f'[{self.STATUS[level]}] {function_name} : {str(string)}'
+        else:
+            console_msg = f'[{self.STATUS[level]}] {str(string)}'
+        if (level >= self.loglv):
+            print(console_msg)
+
+
+    ###-------------------------------------------------------------------
+    def debug(self,string: str, frame=None) -> None:
+    ###-------------------------------------------------------------------
+        self.logger(string,0,frame)
+
+
+    ###-------------------------------------------------------------------
+    def info(self,string: str, frame=None) -> None:
+    ###-------------------------------------------------------------------
+        self.logger(string,1,frame)
+
+
+    ###-------------------------------------------------------------------
+    def warning(self,string: str, frame=None) -> None:
+    ###-------------------------------------------------------------------
+        self.logger(string,2,frame)
+
+
+    ###-------------------------------------------------------------------
+    def error(self,string: str, frame=None) -> None:
+    ###-------------------------------------------------------------------
+        self.logger(string,3,frame)
+
+
+###-----------------------------------------------------------------------
+class Common(Log):
 ###-----------------------------------------------------------------------
     ###-------------------------------------------------------------------
     def __init__(self,loglv: int = 1) -> None:
@@ -26,25 +83,9 @@ class Common(object):
 
 
     ###-------------------------------------------------------------------
-    def logger(self,string: str,level: int, frame=None) -> None:
-    ###-------------------------------------------------------------------
-        status = { 0 : 'DEBUG',
-                   1 : 'INFO',
-                   2 : 'WARNING',
-                   3 : 'ERROR' }
-        if not frame == None:
-            function_name = inspect.getframeinfo(frame)[2]
-            console_msg = '[%s] %s : %s'%(status[level],function_name,str(string))
-        else:
-            console_msg = '[%s] %s'%(status[level],str(string))
-        if (level >= self.loglv):
-            print(console_msg)
-
-
-    ###-------------------------------------------------------------------
     def abort(self,string: str,frame=None) -> None:
     ###------------------------------------------------------------------
-        self.logger(string,3,frame)
+        self.error(string,frame)
         sys.exit(1)
 
 
