@@ -3,4 +3,3 @@ sphinx
 pandas
 matplotlib
 seaborn
-python-box==3.4.6

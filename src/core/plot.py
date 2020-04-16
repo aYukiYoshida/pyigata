@@ -5,19 +5,19 @@ import matplotlib.pyplot as _plt
 import matplotlib._color_data as _mcd
 import numpy as _np
 import seaborn as _sns
-from box import Box as _box
 
 from ..util.common import Common
 from ..util.common import Union as _union
+from ..util.object import ObjectLikeDict
 
 
 ###-----------------------------------------------------------------------
 ### DEFAULT PARAMETERS
 ###-----------------------------------------------------------------------
-FIGSIZE = _box({'x':16, 'y':9})
-GRIDNUM = _box({'v':1, 'h':1})
-GRIDSIZE = _box({'left': 0.1, 'right': 0.95, 'bottom': 0.2, 'top': 0.95})
-GRIDSPACE = _box({'w':0.03, 'h':0.02})
+FIGSIZE = ObjectLikeDict({'x':16, 'y':9})
+GRIDNUM = ObjectLikeDict({'v':1, 'h':1})
+GRIDSIZE = ObjectLikeDict({'left': 0.1, 'right': 0.95, 'bottom': 0.2, 'top': 0.95})
+GRIDSPACE = ObjectLikeDict({'w':0.03, 'h':0.02})
 FSIZE = 25.0                       # font size
 LABFSIZE = FSIZE*0.8               # font size for label
 LEGFSIZE = FSIZE*0.5               # font size for legend
@@ -30,8 +30,8 @@ LWIDTH = 2.0                       # line width
 MARKER = 'o'                       # marker
 PLTFMT = ','                       # format for plot with errors
 MASIZE = 3.0                       # marker size
-IGFONT = _box({'family':'IPAexGothic'})
-COLORS = _box({ 
+IGFONT = ObjectLikeDict({'family':'IPAexGothic'})
+COLORS = ObjectLikeDict({ 
     'blue'      : _sns.color_palette('muted').as_hex()[0],
     'orange'    : _sns.color_palette('muted').as_hex()[1],
     'green'     : _sns.color_palette('muted').as_hex()[2],
@@ -208,61 +208,61 @@ class Plotter(object):
 
     @classmethod
     ###-------------------------------------------------------------------
-    def get_figsize(cls) -> _box:
+    def get_figsize(cls) -> ObjectLikeDict:
     ###-------------------------------------------------------------------
         return cls.figsize
 
 
     @classmethod
     ###-------------------------------------------------------------------
-    def set_figsize(cls,x:int,y:int) -> _box:
+    def set_figsize(cls,x:int,y:int) -> ObjectLikeDict:
     ###-------------------------------------------------------------------
-        cls.figsize = _box(zip(FIGSIZE.keys(),[x,y]))
+        cls.figsize = ObjectLikeDict(zip(FIGSIZE.keys(),[x,y]))
         return cls.figsize
 
 
     @classmethod
     ###-------------------------------------------------------------------
-    def get_gridnum(cls) -> _box:
+    def get_gridnum(cls) -> ObjectLikeDict:
     ###-------------------------------------------------------------------
         return cls.gridnum
 
 
     @classmethod
     ###-------------------------------------------------------------------
-    def set_gridnum(cls,v:int=1,h:int=1) -> _box:
+    def set_gridnum(cls,v:int=1,h:int=1) -> ObjectLikeDict:
     ###-------------------------------------------------------------------
-        cls.gridnum = _box(zip(GRIDNUM.keys(),[v,h]))
+        cls.gridnum = ObjectLikeDict(zip(GRIDNUM.keys(),[v,h]))
         return cls.gridnum
 
 
     @classmethod
     ###-------------------------------------------------------------------
-    def get_gridsize(cls) -> _box:
+    def get_gridsize(cls) -> ObjectLikeDict:
     ###-------------------------------------------------------------------
         return cls.gridsize
 
 
     @classmethod
     ###-------------------------------------------------------------------
-    def set_gridsize(cls,l:float,r:float,b:float,t:float) -> _box:
+    def set_gridsize(cls,l:float,r:float,b:float,t:float) -> ObjectLikeDict:
     ###-------------------------------------------------------------------
-        cls.gridsize = _box(zip(GRIDSIZE.keys(),[l,r,b,t]))
+        cls.gridsize = ObjectLikeDict(zip(GRIDSIZE.keys(),[l,r,b,t]))
         return cls.gridsize
 
 
     @classmethod
     ###-------------------------------------------------------------------
-    def get_gridspace(cls) -> _box:
+    def get_gridspace(cls) -> ObjectLikeDict:
     ###-------------------------------------------------------------------
         return cls.gridspace
 
 
     @classmethod
     ###-------------------------------------------------------------------
-    def set_gridspace(cls,w:float,h:float) -> _box:
+    def set_gridspace(cls,w:float,h:float) -> ObjectLikeDict:
     ###-------------------------------------------------------------------
-        cls.gridspace = _box(zip(GRIDSPACE.keys(),[w,h]))
+        cls.gridspace = ObjectLikeDict(zip(GRIDSPACE.keys(),[w,h]))
         return cls.gridspace
 
 
@@ -448,13 +448,13 @@ class Plotter(object):
 
     @classmethod
     ###-------------------------------------------------------------------
-    def get_igfont(cls) -> _box:
+    def get_igfont(cls) -> ObjectLikeDict:
     ###-------------------------------------------------------------------
         return cls.igfont
 
 
     @classmethod
     ###-------------------------------------------------------------------
-    def get_colors(cls) -> _box:
+    def get_colors(cls) -> ObjectLikeDict:
     ###-------------------------------------------------------------------
         return cls.colors
