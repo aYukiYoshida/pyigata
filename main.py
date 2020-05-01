@@ -9,18 +9,6 @@ from absl import flags
 
 
 ###-----------------------------------------------------------------------
-### to parse arguments
-###-----------------------------------------------------------------------
-flag_values = flags.FLAGS
-flags.DEFINE_boolean('debug', False, 'run with debug mode.')
-flags.DEFINE_enum('loglv', 'INFO', ['DEBUG', 'debug', 'INFO', 'info', 'WARNING', 'warning', 'ERROR', 'error'], 'Logging level.')
-flags.DEFINE_string('name', 'Yuki Yoshida', 'Your name.')
-flags.DEFINE_enum('practice', None, ['a', 'b', 'c'], 'This is one of the command. Practice mode.')
-flags.DEFINE_integer('test', None, 'This is one of the command. Test mode.', lower_bound=0, upper_bound=9)
-flags.DEFINE_enum('exercise', None, ['a', 'b', 'c'], 'This is one of the command. Exercise mode.')
-
-
-###-----------------------------------------------------------------------
 def main(argv):
 ###-----------------------------------------------------------------------
     if flag_values.debug:
@@ -45,4 +33,11 @@ def main(argv):
 ###-----------------------------------------------------------------------
 if __name__ == '__main__':
 ###-----------------------------------------------------------------------
+    flag_values = flags.FLAGS
+    flags.DEFINE_boolean('debug', False, 'run with debug mode.')
+    flags.DEFINE_enum('loglv', 'INFO', ['DEBUG', 'debug', 'INFO', 'info', 'WARNING', 'warning', 'ERROR', 'error'], 'Logging level.')
+    flags.DEFINE_string('name', 'Yuki Yoshida', 'Your name.')
+    flags.DEFINE_enum('practice', None, ['a', 'b', 'c'], 'This is one of the command. Practice mode.')
+    flags.DEFINE_integer('test', None, 'This is one of the command. Test mode.', lower_bound=0, upper_bound=9)
+    flags.DEFINE_enum('exercise', None, ['a', 'b', 'c'], 'This is one of the command. Exercise mode.')
     sys.exit(app.run(main))
