@@ -10,6 +10,18 @@
     % source ./venv/bin/activate
     % deactivate  # 仮想環境終了
     ```
+
+#### docker command
+
+* build
+    ```shellscript
+    % docker build -t pyigata -f docker/Dockerfile .
+    ```
+* run
+    ```shellscript
+    % docker run [-i] [-t] --rm -v $PWD:/usr/local/src pyigata [ARGUMENT]
+    ```
+
 #### usage of setup script
 
 If you want to learn more about `setup.py` files, check out [this repository](https://github.com/kennethreitz/setup.py).
