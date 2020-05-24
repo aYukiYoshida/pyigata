@@ -4,9 +4,9 @@
 
 ### 環境設定
 
-* 仮想環境準備
+* 仮想環境準備 ([公式ドキュメント](https://docs.python.org/ja/3/library/venv.html))
     ```shellscript
-    % virtualenv venv
+    % python3 -m venv venv
     % source ./venv/bin/activate
     % deactivate  # 仮想環境終了
     ```
