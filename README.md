@@ -52,4 +52,14 @@ If you want to learn more about `setup.py` files, check out [this repository](ht
     ```
     The package is generated in dist/
 
+
+### check OSS licenses
+
+```shellscript
+% python3 -m venv venv
+% source ./venv/bin/activate
+% pip install -r requirements.txt
+% python3 ./tool/license_check/output_packages_and_licenses.py
+```
+
 ---
