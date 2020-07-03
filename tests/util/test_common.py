@@ -31,29 +31,37 @@ class TestCommon(unittest.TestCase):
     ###-------------------------------------------------------------------
     def test_logger_debug(self):
     ###-------------------------------------------------------------------
-        self.helper.logger('test',0)
-        self.assertEqual('[DEBUG] test\n',self.captor.getvalue())
+        self.helper.debug('test')
+        self.assertEqual(
+            f'{common.StringColor.COLOR_DEFAULT}[DEBUG] test{common.StringColor.RESET}\n',
+            self.captor.getvalue())
 
 
     ###-------------------------------------------------------------------
     def test_logger_info(self):
     ###-------------------------------------------------------------------
-        self.helper.logger('test',1)
-        self.assertEqual('[INFO] test\n',self.captor.getvalue())
+        self.helper.info('test')
+        self.assertEqual(
+            f'{common.StringColor.COLOR_DEFAULT}[INFO] test{common.StringColor.RESET}\n',
+            self.captor.getvalue())
 
 
     ###-------------------------------------------------------------------
     def test_logger_warning(self):
     ###-------------------------------------------------------------------
-        self.helper.logger('test',2)
-        self.assertEqual('[WARNING] test\n',self.captor.getvalue())
+        self.helper.warning('test')
+        self.assertEqual(
+            f'{common.StringColor.YELLOW}[WARNING] test{common.StringColor.RESET}\n',
+            self.captor.getvalue())
 
 
     ###-------------------------------------------------------------------
     def test_logger_error(self):
     ###-------------------------------------------------------------------
-        self.helper.logger('test',3)
-        self.assertEqual('[ERROR] test\n',self.captor.getvalue())
+        self.helper.error('test')
+        self.assertEqual(
+            f'{common.StringColor.RED}[ERROR] test{common.StringColor.RESET}\n',
+            self.captor.getvalue())
 
 
 ###-----------------------------------------------------------------------
