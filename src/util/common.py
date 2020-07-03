@@ -52,6 +52,12 @@ class Log(object):
         2 : 'WARNING',
         3 : 'ERROR' }
 
+    STRING_COLORS = {
+        0 : StringColor.COLOR_DEFAULT,
+        1 : StringColor.COLOR_DEFAULT,
+        2 : StringColor.YELLOW,
+        3 : StringColor.RED }
+
 
     ###-------------------------------------------------------------------
     def __init__(self,loglv: Union[int, str] = 1) -> None:
@@ -65,7 +71,7 @@ class Log(object):
 
 
     ###-------------------------------------------------------------------
-    def logger(self,string: str,level: int, frame=None) -> None:
+    def logger(self, string:str, level:int, frame=None) -> None:
     ###-------------------------------------------------------------------
         if not frame == None:
             function_name = inspect.getframeinfo(frame)[2]
@@ -73,7 +79,7 @@ class Log(object):
         else:
             console_msg = f'[{self.STATUS[level]}] {str(string)}'
         if (level >= self.loglv):
-            print(console_msg)
+            print(f'{self.STRING_COLORS[level]}{console_msg}{StringColor.RESET}')
 
 
     ###-------------------------------------------------------------------
