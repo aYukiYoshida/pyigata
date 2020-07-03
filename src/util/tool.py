@@ -1,51 +1,51 @@
 # -*- coding: utf-8 -*- 
 
-import pandas as _pd
-import numpy as _np
+import pandas as pd
+import numpy as np
 from sklearn.preprocessing import LabelEncoder as _LabelEncoder
-from .common import Union as _union
+from typing import Union
 
 
 ###-----------------------------------------------------------------------
-def tabular_confusion_matrix(confusion_matrix: _np.ndarray, display_labels:_union[list,None]=None) -> _pd.DataFrame:
+def tabular_confusion_matrix(confusion_matrix: np.ndarray, display_labels:Union[list,None]=None) -> pd.DataFrame:
 ###-----------------------------------------------------------------------
     if display_labels is None:
-        idx = _pd.MultiIndex.from_arrays([
+        idx = pd.MultiIndex.from_arrays([
                 ['True']*confusion_matrix.shape[0],
                 range(confusion_matrix.shape[0])])
-        col = _pd.MultiIndex.from_arrays([
+        col = pd.MultiIndex.from_arrays([
                 ['Predicted']*confusion_matrix.shape[1],
                 range(confusion_matrix.shape[1])])
     else:
-        idx = _pd.MultiIndex.from_arrays([
+        idx = pd.MultiIndex.from_arrays([
                 ['True']*len(display_labels),
                 display_labels])
-        col = _pd.MultiIndex.from_arrays([
+        col = pd.MultiIndex.from_arrays([
                 ['Predicted']*len(display_labels),
                 display_labels])
 
-    table = _pd.DataFrame(confusion_matrix,index=idx,columns=col)
-    table['recall'] = _np.diag(confusion_matrix)/confusion_matrix.sum(axis=1)
-    table['precision'] = _np.diag(confusion_matrix)/confusion_matrix.sum(axis=0)
-    table['accuracy'] = [_np.diag(confusion_matrix).sum()/confusion_matrix.sum()]*confusion_matrix.shape[0]
+    table = pd.DataFrame(confusion_matrix,index=idx,columns=col)
+    table['recall'] = np.diag(confusion_matrix)/confusion_matrix.sum(axis=1)
+    table['precision'] = np.diag(confusion_matrix)/confusion_matrix.sum(axis=0)
+    table['accuracy'] = [np.diag(confusion_matrix).sum()/confusion_matrix.sum()]*confusion_matrix.shape[0]
     return table
 
 
 ###-----------------------------------------------------------------------
-def convert_categorical_to_onehot(array:_union[_np.ndarray,_pd.Series,_pd.DataFrame], classes_number:int=None) -> _np.ndarray:
+def convert_categorical_to_onehot(array:Union[np.ndarray,pd.Series,pd.DataFrame], classes_number:int=None) -> np.ndarray:
 ###-----------------------------------------------------------------------
-    if type(array) is _pd.Series or type(array) is _pd.DataFrame:
+    if type(array) is pd.Series or type(array) is pd.DataFrame:
         array = array.values
     if classes_number is None:
-        classes_number = _np.unique(array)
+        classes_number = np.unique(array)
 
-    return _np.squeeze(_np.eye(classes_number)[array.reshape(-1)])
+    return np.squeeze(np.eye(classes_number)[array.reshape(-1)])
 
 
 ###-----------------------------------------------------------------------
 def convert_categorical_to_label(
-        array:_union[list,_np.ndarray,_pd.Series],
-        label:_union[list,_np.ndarray,_pd.Series]=None) -> np.ndarray:
+        array:Union[list,np.ndarray,pd.Series],
+        label:Union[list,np.ndarray,pd.Series]=None) -> np.ndarray:
 ###-----------------------------------------------------------------------
     le = _LabelEncoder()
     if label is not None:
