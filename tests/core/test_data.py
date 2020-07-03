@@ -24,9 +24,9 @@ class TestData(unittest.TestCase):
 
 
     ###-------------------------------------------------------------------
-    def test_readTestData(self):
+    def test_read_test_data(self):
     ###-------------------------------------------------------------------
-        self.assertIs(type(self.reader.readTestData()),data._pd.DataFrame)
+        self.assertIs(type(self.reader.read_test_data()),data.pd.DataFrame)
 
 
 ###-----------------------------------------------------------------------
