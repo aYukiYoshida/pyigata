@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import pandas as _pd
-import numpy as _np
+import pandas as pd
 
 from ..util.common import inspect
 from ..util.common import os
@@ -34,18 +33,18 @@ class Reader(Manager):
 
 
     ###-------------------------------------------------------------------
-    def readTestData(self, context: str = 'dummy') -> _pd.DataFrame:
+    def read_test_data(self, context: str = 'dummy') -> pd.DataFrame:
     ###-------------------------------------------------------------------
-        self.logger('START',0,inspect.currentframe())
-        self.logger('READ TEST DATA',1)
-                
-        test_data_csv = os.path.join(DAT_DIR,self.TEST_DATA[context])
-        self.logger('  FILE: %s'%(test_data_csv),1)
-        
-        data_frame = _pd.read_csv(test_data_csv)
-        self.logger('  SIZE OF TEST DATA: %d'%(data_frame.index.size),1)
+        self.debug('START',inspect.currentframe())
+        self.info('READ TEST DATA')
 
-        self.logger('END',0,inspect.currentframe())
+        test_data_csv = os.path.join(DAT_DIR,self.TEST_DATA[context])
+        self.info('  FILE: %s'%(test_data_csv))
+
+        data_frame = pd.read_csv(test_data_csv)
+        self.info('  SIZE OF TEST DATA: %d'%(data_frame.index.size))
+
+        self.debug('END',inspect.currentframe())
         return data_frame
 
 
