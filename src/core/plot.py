@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*- 
 
-import matplotlib as _mpl
-import matplotlib.pyplot as _plt 
-import matplotlib._color_data as _mcd
-import numpy as _np
-import seaborn as _sns
+from typing import Union
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt 
+import matplotlib._color_data as mcd
+from numpy import ndarray
+import seaborn as sns
 
 from ..util.common import Common
-from ..util.common import Union as _union
 from ..util.object import ObjectLikeDict
 
 
@@ -32,24 +33,24 @@ PLTFMT = ','                       # format for plot with errors
 MASIZE = 3.0                       # marker size
 IGFONT = ObjectLikeDict({'family':'IPAexGothic'})
 COLORS = ObjectLikeDict({ 
-    'blue'      : _sns.color_palette('muted').as_hex()[0],
-    'orange'    : _sns.color_palette('muted').as_hex()[1],
-    'green'     : _sns.color_palette('muted').as_hex()[2],
-    'red'       : _sns.color_palette('muted').as_hex()[3],
-    'violet'    : _sns.color_palette('muted').as_hex()[4], 
-    'brown'     : _sns.color_palette('muted').as_hex()[5],
-    'pink'      : _sns.color_palette('muted').as_hex()[6],
-    'gray'      : _sns.color_palette('muted').as_hex()[7],
-    'ocher'     : _sns.color_palette('muted').as_hex()[8],
-    'cyan'      : _sns.color_palette('muted').as_hex()[9],
-    'white'     : _mcd.CSS4_COLORS['white'],
-    'black'     : _mcd.CSS4_COLORS['black'],
-    'yellow'    : _mcd.CSS4_COLORS['gold'],
-    'peach'     : _sns.color_palette("husl", 8).as_hex()[0],
-    'emerald'   : _sns.color_palette("husl", 8).as_hex()[4],
-    'turquoise' : _sns.color_palette("husl", 8).as_hex()[5],
-    'purple'    : _sns.color_palette("husl", 8).as_hex()[6], 
-    'magenta'   : _sns.color_palette("husl", 8).as_hex()[7],
+    'blue'      : sns.color_palette('muted').as_hex()[0],
+    'orange'    : sns.color_palette('muted').as_hex()[1],
+    'green'     : sns.color_palette('muted').as_hex()[2],
+    'red'       : sns.color_palette('muted').as_hex()[3],
+    'violet'    : sns.color_palette('muted').as_hex()[4], 
+    'brown'     : sns.color_palette('muted').as_hex()[5],
+    'pink'      : sns.color_palette('muted').as_hex()[6],
+    'gray'      : sns.color_palette('muted').as_hex()[7],
+    'ocher'     : sns.color_palette('muted').as_hex()[8],
+    'cyan'      : sns.color_palette('muted').as_hex()[9],
+    'white'     : mcd.CSS4_COLORS['white'],
+    'black'     : mcd.CSS4_COLORS['black'],
+    'yellow'    : mcd.CSS4_COLORS['gold'],
+    'peach'     : sns.color_palette("husl", 8).as_hex()[0],
+    'emerald'   : sns.color_palette("husl", 8).as_hex()[4],
+    'turquoise' : sns.color_palette("husl", 8).as_hex()[5],
+    'purple'    : sns.color_palette("husl", 8).as_hex()[6], 
+    'magenta'   : sns.color_palette("husl", 8).as_hex()[7],
 })
 
 
@@ -67,13 +68,13 @@ def configure_figure(
         grid_hs :float=GRIDSPACE.h,
         sharex :bool = True,
         sharey :bool = True
-        ) -> (_mpl.figure.Figure, _union[_np.ndarray, _mpl.axes.Subplot]):
+        ) -> (mpl.figure.Figure, Union[ndarray, mpl.axes.Subplot]):
 ###-----------------------------------------------------------------------
     if sharex:
         sharex = 'col'
     if sharey:
         sharey = 'row'
-    fig,ax = _plt.subplots(grid_num_v,grid_num_h,
+    fig,ax = plt.subplots(grid_num_v,grid_num_h,
                 figsize=(figsize_x, figsize_y),
                 sharex=sharex,sharey=sharey)
     fig.subplots_adjust(
@@ -84,377 +85,244 @@ def configure_figure(
     return fig, ax
 
 
-###-----------------------------------------------------------------------
-def set_rcparams() -> None:
-###-----------------------------------------------------------------------
-    _plt.rcParams['font.family'] = 'Times New Roman'
-    _plt.rcParams['mathtext.fontset'] = 'cm'
-    _plt.rcParams['mathtext.rm'] = 'serif'
-    _plt.rcParams['axes.titleweight'] = 'bold'
-    # _plt.rcParams['axes.labelweight'] = 'bold'
-    _plt.rcParams['axes.linewidth'] = LWIDTH
-    _plt.rcParams['grid.linestyle'] = 'solid'
-    _plt.rcParams['grid.linewidth'] = 1.0
-    _plt.rcParams['grid.alpha'] = 0.2
-    _plt.rcParams['xtick.major.size'] = 8
-    _plt.rcParams['xtick.minor.size'] = 5
-    _plt.rcParams['xtick.major.width'] = LWIDTH
-    _plt.rcParams['xtick.minor.width'] = LWIDTH
-    _plt.rcParams['xtick.major.pad'] = 5
-    _plt.rcParams['ytick.major.size'] = 8
-    _plt.rcParams['xtick.top'] = True
-    _plt.rcParams['ytick.minor.size'] = 5
-    _plt.rcParams['ytick.major.width'] = LWIDTH
-    _plt.rcParams['ytick.minor.width'] = LWIDTH
-    _plt.rcParams['ytick.major.pad'] = 5
-    _plt.rcParams['xtick.direction'] = 'in'
-    _plt.rcParams['ytick.direction'] = 'in'
-    _plt.rcParams['xtick.labelsize'] = LABFSIZE
-    _plt.rcParams['ytick.labelsize'] = LABFSIZE
-    _plt.rcParams['ytick.right'] = True
-
-
-
-###-----------------------------------------------------------------------
-class Plotter(object):
-###-----------------------------------------------------------------------
-    ###-------------------------------------------------------------------
-    ### CLASS VARIABLES
-    ###-------------------------------------------------------------------
-    figsize = FIGSIZE
-    gridnum = GRIDNUM
-    gridsize = GRIDSIZE
-    gridspace = GRIDSPACE
-    fsize = FSIZE
-    labfsize = LABFSIZE
-    legfsize = LEGFSIZE
-    tckfsize = TCKFSIZE
-    calign = CALIGN
-    valign = VALIGN
-    halign = HALIGN
-    lstyle = LSTYLE
-    lwidth = LWIDTH
-    marker = MARKER
-    pltfmt = PLTFMT
-    masize = MASIZE
-    igfont = IGFONT
-    colors = COLORS
-    sharex = True
-    sharey = True
-
-
-    ###-------------------------------------------------------------------
-    def __init__(self) -> None:
-    ###-------------------------------------------------------------------
-        pass
-
-
-    @classmethod
-    ###-------------------------------------------------------------------
-    def configure_figure(cls) -> (_mpl.figure.Figure, _union[_np.ndarray, _mpl.axes.Subplot]):
-    ###-------------------------------------------------------------------
-        return configure_figure(
-            cls.figsize.x,cls.figsize.y,
-            cls.gridnum.v,cls.gridnum.h,
-            cls.gridsize.left,cls.gridsize.right,
-            cls.gridsize.bottom,cls.gridsize.top,
-            cls.gridspace.w,cls.gridspace.h,
-            cls.sharex,cls.sharey)
-
-
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_rcparams(cls) -> None:
-    ###-------------------------------------------------------------------
-        set_rcparams()
-        _plt.rcParams['axes.linewidth'] = cls.lwidth
-        _plt.rcParams['xtick.major.width'] = cls.lwidth
-        _plt.rcParams['xtick.minor.width'] = cls.lwidth
-        _plt.rcParams['ytick.major.width'] = cls.lwidth
-        _plt.rcParams['ytick.minor.width'] = cls.lwidth
-        _plt.rcParams['xtick.labelsize'] = cls.labfsize
-        _plt.rcParams['ytick.labelsize'] = cls.labfsize
-
-
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_sharex(cls) -> bool:
-    ###-------------------------------------------------------------------
-        return cls.sharex
-
-
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_sharex(cls,share:bool) -> bool:
-    ###-------------------------------------------------------------------
-        cls.sharex = share
-        return cls.sharex
+class PlotEnvironment(object):
+
+    def __init__(
+        self, figsize=FIGSIZE, gridnum=GRIDNUM,
+        gridsize=GRIDSIZE, gridspace=GRIDSPACE, fsize=FSIZE,
+        labfsize=LABFSIZE, legfsize=LEGFSIZE, tckfsize=TCKFSIZE,
+        calign=CALIGN, valign=VALIGN, halign=HALIGN,
+        lstyle=LSTYLE, lwidth=LWIDTH, marker=MARKER,
+        pltfmt=PLTFMT, masize=MASIZE, igfont=IGFONT,
+        colors=COLORS, sharex=True, sharey=True) -> None:
+
+        self.figsize = figsize
+        self.gridnum = gridnum
+        self.gridsize = gridsize
+        self.gridspace = gridspace
+        self.fsize = fsize
+        self.labfsize = labfsize
+        self.legfsize = legfsize
+        self.tckfsize = tckfsize
+        self.calign = calign
+        self.valign = valign
+        self.halign = halign
+        self.lstyle = lstyle
+        self.lwidth = lwidth
+        self.marker = marker
+        self.pltfmt = pltfmt
+        self.masize = masize
+        self.igfont = igfont
+        self.colors = colors
+        self.sharex = sharex
+        self.sharey = sharey
+        self.set_rcparams()
+        self.configure_figure()
+        
+
+    def set_rcparams(self) -> None:
+        plt.rcParams['font.family'] = 'Times New Roman'
+        plt.rcParams['mathtext.fontset'] = 'cm'
+        plt.rcParams['mathtext.rm'] = 'serif'
+        plt.rcParams['axes.titleweight'] = 'bold'
+        # plt.rcParams['axes.labelweight'] = 'bold'
+        plt.rcParams['axes.linewidth'] = self.lwidth
+        plt.rcParams['grid.linestyle'] = 'solid'
+        plt.rcParams['grid.linewidth'] = 1.0
+        plt.rcParams['grid.alpha'] = 0.2
+        plt.rcParams['xtick.major.size'] = 8
+        plt.rcParams['xtick.minor.size'] = 5
+        plt.rcParams['xtick.major.width'] = self.lwidth
+        plt.rcParams['xtick.minor.width'] = self.lwidth
+        plt.rcParams['xtick.major.pad'] = 5
+        plt.rcParams['ytick.major.size'] = 8
+        plt.rcParams['xtick.top'] = True
+        plt.rcParams['ytick.minor.size'] = 5
+        plt.rcParams['ytick.major.width'] = self.lwidth
+        plt.rcParams['ytick.minor.width'] = self.lwidth
+        plt.rcParams['ytick.major.pad'] = 5
+        plt.rcParams['xtick.direction'] = 'in'
+        plt.rcParams['ytick.direction'] = 'in'
+        plt.rcParams['xtick.labelsize'] = self.labfsize
+        plt.rcParams['ytick.labelsize'] = self.labfsize
+        plt.rcParams['ytick.right'] = True
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_sharey(cls) -> bool:
-    ###-------------------------------------------------------------------
-        return cls.sharey
+    def configure_figure(self) -> None:
+        self.fig, self.axes = configure_figure(
+            self.figsize.x,self.figsize.y,
+            self.gridnum.v,self.gridnum.h,
+            self.gridsize.left,self.gridsize.right,
+            self.gridsize.bottom,self.gridsize.top,
+            self.gridspace.w,self.gridspace.h,
+            self.sharex,self.sharey)
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_sharey(cls,share:bool) -> bool:
-    ###-------------------------------------------------------------------
-        cls.sharey = share
-        return cls.sharey
+    def get_sharex(self) -> bool:
+        return self.sharex
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_figsize(cls) -> ObjectLikeDict:
-    ###-------------------------------------------------------------------
-        return cls.figsize
+    def set_sharex(self, share:bool) -> bool:
+        self.sharex = share
+        return self.sharex
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_figsize(cls,x:int,y:int) -> ObjectLikeDict:
-    ###-------------------------------------------------------------------
-        cls.figsize = ObjectLikeDict(zip(FIGSIZE.keys(),[x,y]))
-        return cls.figsize
+    def get_sharey(self) -> bool:
+        return self.sharey
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_gridnum(cls) -> ObjectLikeDict:
-    ###-------------------------------------------------------------------
-        return cls.gridnum
+    def set_sharey(self, share:bool) -> bool:
+        self.sharey = share
+        return self.sharey
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_gridnum(cls,v:int=1,h:int=1) -> ObjectLikeDict:
-    ###-------------------------------------------------------------------
-        cls.gridnum = ObjectLikeDict(zip(GRIDNUM.keys(),[v,h]))
-        return cls.gridnum
+    def get_figsize(self) -> ObjectLikeDict:
+        return self.figsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_gridsize(cls) -> ObjectLikeDict:
-    ###-------------------------------------------------------------------
-        return cls.gridsize
+    def set_figsize(self, x:int, y:int) -> ObjectLikeDict:
+        self.figsize = ObjectLikeDict(zip(FIGSIZE.keys(),[x,y]))
+        return self.figsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_gridsize(cls,l:float,r:float,b:float,t:float) -> ObjectLikeDict:
-    ###-------------------------------------------------------------------
-        cls.gridsize = ObjectLikeDict(zip(GRIDSIZE.keys(),[l,r,b,t]))
-        return cls.gridsize
+    def get_gridnum(self) -> ObjectLikeDict:
+        return self.gridnum
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_gridspace(cls) -> ObjectLikeDict:
-    ###-------------------------------------------------------------------
-        return cls.gridspace
+    def set_gridnum(self, v:int=1, h:int=1) -> ObjectLikeDict:
+        self.gridnum = ObjectLikeDict(zip(GRIDNUM.keys(),[v,h]))
+        return self.gridnum
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_gridspace(cls,w:float,h:float) -> ObjectLikeDict:
-    ###-------------------------------------------------------------------
-        cls.gridspace = ObjectLikeDict(zip(GRIDSPACE.keys(),[w,h]))
-        return cls.gridspace
+    def get_gridsize(self) -> ObjectLikeDict:
+        return self.gridsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_fsize(cls) -> float:
-    ###-------------------------------------------------------------------
-        return cls.fsize
+    def set_gridsize(self, l:float, r:float, b:float, t:float) -> ObjectLikeDict:
+        self.gridsize = ObjectLikeDict(zip(GRIDSIZE.keys(),[l,r,b,t]))
+        return self.gridsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_fsize(cls,s:float) -> float:
-    ###-------------------------------------------------------------------
-        cls.figsize = s        
-        return cls.fsize
+    def get_gridspace(self) -> ObjectLikeDict:
+        return self.gridspace
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_labfsize(cls) -> float:
-    ###-------------------------------------------------------------------
-        return cls.labfsize
+    def set_gridspace(self, w:float,h:float) -> ObjectLikeDict:
+        self.gridspace = ObjectLikeDict(zip(GRIDSPACE.keys(),[w,h]))
+        return self.gridspace
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_labfsize(cls,s:float) -> float:
-    ###-------------------------------------------------------------------
-        cls.labfsize = s
-        return cls.labfsize
+    def get_fsize(self) -> float:
+        return self.fsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_legfsize(cls) -> float:
-    ###-------------------------------------------------------------------
-        return cls.legfsize
+    def set_fsize(self, s:float) -> float:
+        self.fsize = s        
+        return self.fsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_legfsize(cls,s:float) -> float:
-    ###-------------------------------------------------------------------
-        cls.legfsize = s
-        return cls.legfsize
+    def get_labfsize(self) -> float:
+        return self.labfsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_tckfsize(cls) -> float:
-    ###-------------------------------------------------------------------
-        return cls.tckfsize
+    def set_labfsize(self, s:float) -> float:
+        self.labfsize = s
+        return self.labfsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_tckfsize(cls,s:float) -> float:
-    ###-------------------------------------------------------------------
-        cls.tckfsize = s
-        return cls.tckfsize
+    def get_legfsize(self) -> float:
+        return self.legfsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_calign(cls) -> str:
-    ###-------------------------------------------------------------------
-        return cls.calign
+    def set_legfsize(self, s:float) -> float:
+        self.legfsize = s
+        return self.legfsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_calign(cls,s:str) -> str:
-    ###-------------------------------------------------------------------
-        cls.calign = s
-        return cls.calign
+    def get_tckfsize(self) -> float:
+        return self.tckfsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_valign(cls) -> str:
-    ###-------------------------------------------------------------------
-        return cls.valign
+    def set_tckfsize(self, s:float) -> float:
+        self.tckfsize = s
+        return self.tckfsize
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_valign(cls,s:str) -> str:
-    ###-------------------------------------------------------------------
-        cls.valign = s
-        return cls.valign
+    def get_calign(self) -> str:
+        return self.calign
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_halign(cls) -> str:
-    ###-------------------------------------------------------------------
-        return cls.halign
+    def set_calign(self, s:str) -> str:
+        self.calign = s
+        return self.calign
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_halign(cls,s:str) -> str:
-    ###-------------------------------------------------------------------
-        cls.halign = s
-        return cls.halign
+    def get_valign(self) -> str:
+        return self.valign
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_lstyle(cls) -> str:
-    ###-------------------------------------------------------------------
-        return cls.lstyle
+    def set_valign(self, s:str) -> str:
+        self.valign = s
+        return self.valign
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_lstyle(cls,s:str) -> str:
-    ###-------------------------------------------------------------------
-        cls.lstyle = s
-        return cls.lstyle
+    def get_halign(self) -> str:
+        return self.halign
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_lwidth(cls) -> float:
-    ###-------------------------------------------------------------------
-        return cls.lwidth
+    def set_halign(self, s:str) -> str:
+        self.halign = s
+        return self.halign
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_lwidth(cls,w:float) -> float:
-    ###-------------------------------------------------------------------
-        cls.lwidth = w
-        return cls.lwidth
+    def get_lstyle(self) -> str:
+        return self.lstyle
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_marker(cls) -> str:
-    ###-------------------------------------------------------------------
-        return cls.marker
+    def set_lstyle(self, s:str) -> str:
+        self.lstyle = s
+        return self.lstyle
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_marker(cls,m:str) -> str:
-    ###-------------------------------------------------------------------
-        cls.marker = m
-        return cls.marker
+    def get_lwidth(self) -> float:
+        return self.lwidth
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_pltfmt(cls) -> str:
-    ###-------------------------------------------------------------------
-        return cls.pltfmt
+    def set_lwidth(self, w:float) -> float:
+        self.lwidth = w
+        return self.lwidth
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_pltfmt(cls,f:str) -> str:
-    ###-------------------------------------------------------------------
-        cls.pltfmt = f
-        return cls.pltfmt
+    def get_marker(self) -> str:
+        return self.marker
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_masize(cls) -> float:
-    ###-------------------------------------------------------------------
-        return cls.masize
+    def set_marker(self, m:str) -> str:
+        self.marker = m
+        return self.marker
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def set_masize(cls,s:float) -> float:
-    ###-------------------------------------------------------------------
-        cls.masize = s
-        return cls.masize
+    def getpltfmt(self) -> str:
+        return self.pltfmt
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_igfont(cls) -> ObjectLikeDict:
-    ###-------------------------------------------------------------------
-        return cls.igfont
+    def setpltfmt(self, f:str) -> str:
+        self.pltfmt = f
+        return self.pltfmt
 
 
-    @classmethod
-    ###-------------------------------------------------------------------
-    def get_colors(cls) -> ObjectLikeDict:
-    ###-------------------------------------------------------------------
-        return cls.colors
+    def get_masize(self) -> float:
+        return self.masize
+
+
+    def set_masize(self, s:float) -> float:
+        self.masize = s
+        return self.masize
+
+
+    def get_igfont(self) -> ObjectLikeDict:
+        return self.igfont
+
+
+    def get_colors(self) -> ObjectLikeDict:
+        return self.colors
