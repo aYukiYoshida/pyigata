@@ -6,8 +6,7 @@ import pkg_resources
 from typing import List, Union
 from collections import deque
 from enum import Enum 
-
-import pandas as pd
+import csv
 
 from .common import Common
 from .object import ObjectLikeDict
@@ -36,7 +35,7 @@ class LicenseListCreator(Common):
         super().__init__(loglv)
         python_path = args.get('python_path')
         self.python_path:List[str] = python_path if isinstance(python_path,list) else [ python_path ]
-        self.output_csv:str = args.get('output_csv', 'license_list.csv')
+        self.output_csv:str = args.get('output_csv', os.path.join('out', 'license_list.csv'))
         self.fetch()
 
     @staticmethod
@@ -75,15 +74,16 @@ class LicenseListCreator(Common):
                 self.warning(f'  {path}')
 
         working_set = pkg_resources.WorkingSet(self.python_path)
-        self.infomation = deque(
+        self.information = deque(
             ObjectLikeDict(zip(
                 self.INFO_LABEL,
                 [ pkg.key, pkg.version, self.__get_pkg_license(pkg), self.__get_pkg_home_page(pkg) ]))
                 for pkg in sorted(working_set, key=lambda x: str(x).lower()))
 
     def create(self) -> None:
-        info_table = pd.DataFrame(dict(zip(
-            self.INFO_LABEL,
-            [[ info[label] for info in self.infomation ] for label in self.INFO_LABEL])))
-        info_table.to_csv(self.output_csv, index=False)
+        with open(self.output_csv, 'w') as f:
+            writer = csv.DictWriter(f, self.INFO_LABEL)
+            writer.writeheader()
+            for info in self.information:
+                writer.writerow(info)
         self.info(f'{self.output_csv} is created !!')

@@ -64,7 +64,8 @@ If you want to learn more about `setup.py` files, check out [this repository](ht
 % python3 -m venv venv
 % source ./venv/bin/activate
 % pip install -r requirements.txt
-% python3 ./tool/license_check/output_packages_and_licenses.py
+% deactivate
+% python3 main.py --license=default --target=./venv/lib/python3.8/site-packages --output=./out/license_list.csv
 ```
 
 ---
