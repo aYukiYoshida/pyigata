@@ -18,9 +18,14 @@
     % docker build -t pyigata -f docker/Dockerfile .
     ```
 * run
-    ```shellscript
-    % docker run [-i] [-t] --rm -v $PWD:/usr/local/src pyigata [ARGUMENT]
-    ```
+    * run python script
+        ```shellscript
+        % docker run [-i] [-t] --rm -v $PWD:/opt/src pyigata [ARGUMENT]
+        ```
+    * run shell prompt
+        ```shellscript
+        % docker run [-i] [-t] --entrypoint /bin/bash -rm -v $PWD:/opt/src pyigata
+        ```
 
 #### usage of setup script
 
