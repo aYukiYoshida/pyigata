@@ -24,7 +24,7 @@
         ```
     * run shell prompt
         ```shellscript
-        % docker run [-i] [-t] --entrypoint /bin/bash -rm -v $PWD:/opt/src pyigata
+        % docker run [-i] [-t] --entrypoint /bin/bash --rm -v $PWD:/opt/src pyigata
         ```
 
 #### usage of setup script
