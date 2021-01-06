@@ -30,7 +30,7 @@ class StringColor(object):
 	BOLD           = '\033[1m'#太字
 	UNDERLINE      = '\033[4m'#下線
 	INVISIBLE      = '\033[08m'#不可視
-	REVERCE        = '\033[07m'#文字色と背景色を反転
+	REVERSE        = '\033[07m'#文字色と背景色を反転
 	BG_BLACK       = '\033[40m'#(背景)黒
 	BG_RED         = '\033[41m'#(背景)赤
 	BG_GREEN       = '\033[42m'#(背景)緑
@@ -60,14 +60,14 @@ class Log(object):
 
 
     ###-------------------------------------------------------------------
-    def __init__(self,loglv: Union[int, str] = 1) -> None:
+    def __init__(self,log_level: Union[int, str] = 1) -> None:
     ###-------------------------------------------------------------------
-        if type(loglv) is str:
+        if type(log_level) is str:
             try:
-                loglv = list(self.STATUS.values()).index(loglv.upper())
+                log_level:int = list(self.STATUS.values()).index(log_level.upper())
             except ValueError:
-                raise ValueError(f'loglv should be set to an integer between 0 and 3 or a one of '+', '.join(self.STATUS.values())+'.')
-        self.loglv: int = loglv
+                raise ValueError(f'log_level should be set to an integer between 0 and 3 or a one of '+', '.join(self.STATUS.values())+'.')
+        self.log_level:int = log_level
 
 
     ###-------------------------------------------------------------------
@@ -78,7 +78,7 @@ class Log(object):
             console_msg = f'[{self.STATUS[level]}] {function_name} : {str(string)}'
         else:
             console_msg = f'[{self.STATUS[level]}] {str(string)}'
-        if (level >= self.loglv):
+        if (level >= self.log_level):
             print(f'{self.STRING_COLORS[level]}{console_msg}{StringColor.RESET}')
 
 
@@ -110,9 +110,9 @@ class Log(object):
 class Common(Log):
 ###-----------------------------------------------------------------------
     ###-------------------------------------------------------------------
-    def __init__(self,loglv: Union[int, str] = 1) -> None:
+    def __init__(self,log_level: Union[int, str] = 1) -> None:
     ###-------------------------------------------------------------------
-        super().__init__(loglv)
+        super().__init__(log_level)
 
 
     ###-------------------------------------------------------------------

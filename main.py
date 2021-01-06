@@ -10,8 +10,8 @@ from absl import flags
 
 def main(argv):
     if flag_values.debug:
-        flag_values.loglv = 0
-    logger = src.common.Common(flag_values.loglv)
+        flag_values.log_level = 0
+    logger = src.common.Common(flag_values.log_level)
 
     command_flags_list = [ flag_values.license, flag_values.test ]
     if len([ command_flag for command_flag in command_flags_list if command_flag is not None]) == 1:
@@ -23,7 +23,7 @@ def main(argv):
                     creator_type=flag_values.license,
                     python_path=flag_values.target,
                     output_csv=flag_values.output,
-                    loglv=flag_values.loglv)
+                    log_level=flag_values.log_level)
                 creator.create()
             else:
                 logger.error('Please input --target')
@@ -42,7 +42,7 @@ def define_flags():
     flags.DEFINE_boolean(
         'debug', False, 'run with debug mode.')
     flags.DEFINE_enum(
-        'loglv', 'INFO',
+        'log_level', 'INFO',
         ['DEBUG', 'debug', 'INFO', 'info', 'WARNING', 'warning', 'ERROR', 'error'],
         'Logging level.')
     flags.DEFINE_string(

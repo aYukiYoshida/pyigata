@@ -11,7 +11,7 @@ class TestCommon(unittest.TestCase):
     ###-------------------------------------------------------------------
     def setUp(self):
     ###-------------------------------------------------------------------
-        self.helper = common.Common(loglv=0)
+        self.helper = common.Common(log_level=0)
         self.captor = io.StringIO()
         sys.stdout = self.captor
 
@@ -33,7 +33,7 @@ class TestCommon(unittest.TestCase):
     ###-------------------------------------------------------------------
         self.helper.debug('test')
         self.assertEqual(
-            f'{common.StringColor.COLOR_DEFAULT}[DEBUG] test{common.StringColor.RESET}\n',
+            f'{common.StringColor.GREEN}[DEBUG] test{common.StringColor.RESET}\n',
             self.captor.getvalue())
 
 

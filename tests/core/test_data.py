@@ -12,7 +12,7 @@ class TestData(unittest.TestCase):
     ###-------------------------------------------------------------------
     def setUp(self):
     ###-------------------------------------------------------------------
-        self.reader = data.Reader(loglv=0)
+        self.reader = data.Reader(log_level=0)
         self.captor = io.StringIO()
         sys.stdout = self.captor
 

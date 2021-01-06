@@ -9,7 +9,7 @@ from enum import Enum
 import csv
 
 from .common import Common
-from .object import ObjectLikeDict
+from .extend import ExtendDict
 
 
 class CreatorType(Enum):
@@ -19,20 +19,20 @@ class CreatorType(Enum):
 
 class CreatorFactory:
     @classmethod
-    def get_instance(cls, creator_type:str='default', loglv:Union[int, str]=1, **args):
+    def get_instance(cls, creator_type:str='default', log_level:Union[int, str]=1, **args):
         try:
             creator_type = CreatorType(creator_type)
             if creator_type in [ CreatorType.DEFAULT, CreatorType.LIST ]:
-                return LicenseListCreator(loglv,**args)
+                return LicenseListCreator(log_level,**args)
         except ValueError:
             raise NotImplementedError(f'type of {creator_type.value} is not implemented !!')
 
 
 class LicenseListCreator(Common):
-    INFO_LABEL = [ 'name', 'version', 'license', 'hogepage' ]
+    INFO_LABEL = [ 'name', 'version', 'license', 'homepage' ]
 
-    def __init__(self,loglv: Union[int, str], **args) -> None:
-        super().__init__(loglv)
+    def __init__(self,log_level: Union[int, str], **args) -> None:
+        super().__init__(log_level)
         python_path = args.get('python_path')
         self.python_path:List[str] = python_path if isinstance(python_path,list) else [ python_path ]
         self.output_csv:str = args.get('output_csv', os.path.join('out', 'license_list.csv'))
@@ -75,7 +75,7 @@ class LicenseListCreator(Common):
 
         working_set = pkg_resources.WorkingSet(self.python_path)
         self.information = deque(
-            ObjectLikeDict(zip(
+            ExtendDict(zip(
                 self.INFO_LABEL,
                 [ pkg.key, pkg.version, self.__get_pkg_license(pkg), self.__get_pkg_home_page(pkg) ]))
                 for pkg in sorted(working_set, key=lambda x: str(x).lower()))
