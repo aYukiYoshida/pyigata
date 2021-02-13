@@ -5,38 +5,26 @@ import os
 import pkg_resources
 from typing import List, Union
 from collections import deque
-from enum import Enum 
+from enum import Enum
 import csv
 
 from .common import Common
 from .extend import ExtendDict
 
 
-class CreatorType(Enum):
-    DEFAULT = 'default'
-    LIST = 'list'
-
-
-class CreatorFactory:
-    @classmethod
-    def get_instance(cls, creator_type:str='default', log_level:Union[int, str]=1, **args):
-        try:
-            creator_type = CreatorType(creator_type)
-            if creator_type in [ CreatorType.DEFAULT, CreatorType.LIST ]:
-                return LicenseListCreator(log_level,**args)
-        except ValueError:
-            raise NotImplementedError(f'type of {creator_type.value} is not implemented !!')
-
-
 class LicenseListCreator(Common):
-    INFO_LABEL = [ 'name', 'version', 'license', 'homepage' ]
+    INFO_LABEL = ['name', 'version', 'license', 'homepage']
 
-    def __init__(self,log_level: Union[int, str], **args) -> None:
+    def __init__(self, python_path: Union[str, List[str]], output_csv:str, log_level: int) -> None:
         super().__init__(log_level)
-        python_path = args.get('python_path')
-        self.python_path:List[str] = python_path if isinstance(python_path,list) else [ python_path ]
-        self.output_csv:str = args.get('output_csv', os.path.join('out', 'license_list.csv'))
+        python_path = python_path
+        self.python_path: List[str] = python_path if isinstance(
+            python_path, list) else [python_path]
+        self.output_csv = output_csv
+
+    def __call__(self) -> None:
         self.fetch()
+        self.create()
 
     @staticmethod
     def __get_pkg_license(pkg):
@@ -51,7 +39,7 @@ class LicenseListCreator(Common):
             for line in lines:
                 if line.startswith(label):
                     license = line[len(label):]
-                    break 
+                    break
         return license
 
     @staticmethod
@@ -65,6 +53,8 @@ class LicenseListCreator(Common):
             if line.startswith(label):
                 url = line[len(label):]
                 break
+        else:
+            url = None
         return url
 
     def fetch(self) -> None:
@@ -77,8 +67,8 @@ class LicenseListCreator(Common):
         self.information = deque(
             ExtendDict(zip(
                 self.INFO_LABEL,
-                [ pkg.key, pkg.version, self.__get_pkg_license(pkg), self.__get_pkg_home_page(pkg) ]))
-                for pkg in sorted(working_set, key=lambda x: str(x).lower()))
+                [pkg.key, pkg.version, self.__get_pkg_license(pkg), self.__get_pkg_home_page(pkg)]))
+            for pkg in sorted(working_set, key=lambda x: str(x).lower()))
 
     def create(self) -> None:
         with open(self.output_csv, 'w') as f:

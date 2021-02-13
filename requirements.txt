@@ -3,4 +3,3 @@ sphinx
 pandas
 matplotlib
 seaborn
-absl-py
