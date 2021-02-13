@@ -15,7 +15,7 @@
 
 * build
     ```shellscript
-    % docker build -t pyigata -f docker/Dockerfile .
+    % docker build -t pyigata -f docker/Dockerfile.pyigata .
     ```
 * run
     * run python script
@@ -65,7 +65,27 @@ If you want to learn more about `setup.py` files, check out [this repository](ht
 % source ./venv/bin/activate
 % pip install -r requirements.txt
 % deactivate
-% python3 main.py --license=default --target=./venv/lib/python3.8/site-packages --output=./out/license_list.csv
+% python3 main.py license \
+    --target=./venv/lib/python3.8/site-packages \
+    --output=./out/license_list.csv
 ```
 
+### Run jupyter lab on docker
+
+* build  
+    ```shellscript
+    % docker-compose build
+    ```
+* run  
+    ```shellscript
+    % docker-compose up -d
+    ```
+* run shell  
+    ```shellscript
+    % docker-compose exec -u root jupyternbenv bash -p
+    ```
+* shutdown  
+    ```shellscript
+    % docker-compose down
+    ```
 ---

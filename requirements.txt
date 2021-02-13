@@ -1,5 +1,9 @@
 nose
 sphinx
+numpy
 pandas
 matplotlib
 seaborn
+# jupyter
+ipywidgets
+jupyter-emacskeys

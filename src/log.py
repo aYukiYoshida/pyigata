@@ -42,13 +42,12 @@ class Log(object):
     def logger(self, string: str, log_level: Union[int, LogLevel], frame=None) -> None:
         if isinstance(log_level, int):
             log_level = LogLevel(log_level)
-        if not frame is None:
+        if frame:
             function_name = inspect.getframeinfo(frame)[2]
             console_msg = f'[{log_level.name}] {function_name} : {str(string)}'
         else:
             console_msg = f'[{log_level.name}] {str(string)}'
         if (log_level >= self.level):
-
             print(f'{log_level.color}{console_msg}{self.__RESET_COLOR}')
 
     def debug(self, string: str, frame=None) -> None:

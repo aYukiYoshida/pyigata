@@ -144,5 +144,9 @@ media
 static
 
 # original
-out/
-dev*.ipynb
+work/out/*
+!work/out/.gitkeep
+work/data/*
+!work/data/.gitkeep
+work/src/*
+work/dev.ipynb

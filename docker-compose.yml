@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  jupyternbenv:
+    image: jupyternbenv
+    build:
+      context   : ./
+      dockerfile: ./docker/Dockerfile.jupyter
+    container_name: "jupyternbenv"
+    volumes:
+      - ./work:/home/jovyan/work
+      - ./src:/home/jovyan/work/src 
+    ports:
+      - "8888:8888" # used by jupyter lab
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    tty: true
+    entrypoint: "start.sh jupyter lab --NotebookApp.token=''"

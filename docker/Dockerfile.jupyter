@@ -1,0 +1,14 @@
+FROM jupyter/datascience-notebook:python-3.8.6
+
+WORKDIR /home/jovyan
+
+COPY ./requirements.txt /home/jovyan/
+
+# install python packages
+RUN pip install --upgrade pip
+RUN pip install -r /home/jovyan/requirements.txt
+
+# JupyterLab extensions
+RUN jupyter labextension install @jupyterlab/toc
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension
