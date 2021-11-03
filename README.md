@@ -5,7 +5,8 @@
 ### 環境設定
 
 * 仮想環境準備 ([公式ドキュメント](https://docs.python.org/ja/3/library/venv.html))
-    ```shellscript
+
+    ```bash
     % python3 -m venv venv
     % source ./venv/bin/activate
     % deactivate  # 仮想環境終了
@@ -14,53 +15,77 @@
 #### docker command
 
 * build
-    ```shellscript
+
+    ```bash
     % docker build -t pyigata -f docker/Dockerfile.pyigata .
     ```
+
 * run
-    * run python script
-        ```shellscript
-        % docker run [-i] [-t] --rm -v $PWD:/opt/src pyigata [ARGUMENT]
-        ```
-    * run shell prompt
-        ```shellscript
-        % docker run [-i] [-t] --entrypoint /bin/bash --rm -v $PWD:/opt/src pyigata
-        ```
+
+  * run python script
+
+    ```bash
+    % docker run [-i] [-t] --rm -v $PWD:/opt/src pyigata [ARGUMENT]
+    ```
+
+  * run shell prompt
+
+    ```bash
+    % docker run [-i] [-t] --entrypoint /bin/bash --rm -v $PWD:/opt/src pyigata
+    ```
 
 #### usage of setup script
 
 If you want to learn more about `setup.py` files, check out [this repository](https://github.com/kennethreitz/setup.py).
 
 * build
-    ```shellscript
+
+    ```bash
     % ./setup.py build
     ```
+
 * install
-    ```shellscript
+
+    ```bash
     % ./setup.py install
     ```
+
 * unit test
-    ```shellscript
+
+    ```bash
     % ./setup.py test
     ```
+
 * clean
-    ```shellscript
+
+    ```bash
     % ./setup.py clean
     ```
+
 * check
-    ```shellscript
+
+    ```bash
     % ./setup.py check
     ```
+
 * generate package
-    ```shellscript
+
+    ```bash
     % ./setup.py sdist
     ```
-    The package is generated in dist/
 
+    Then the package is generated in `dist/`.
+
+#### pre-commit
+
+```bash
+% pre-commit --version # verify that the installation was successful
+% pre-commit install
+```
 
 ### check OSS licenses
 
-```shellscript
+```bash
 % python3 -m venv venv
 % source ./venv/bin/activate
 % pip install -r requirements.txt
@@ -72,20 +97,28 @@ If you want to learn more about `setup.py` files, check out [this repository](ht
 
 ### Run jupyter lab on docker
 
-* build  
-    ```shellscript
+* build
+
+    ```bash
     % docker-compose build
     ```
-* run  
-    ```shellscript
+
+* run
+
+    ```bash
     % docker-compose up -d
     ```
-* run shell  
-    ```shellscript
+
+* run shell
+
+    ```bash
     % docker-compose exec -u root jupyternbenv bash -p
     ```
-* shutdown  
-    ```shellscript
+
+* shutdown
+
+    ```bash
     % docker-compose down
     ```
+
 ---
