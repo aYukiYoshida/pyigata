@@ -4,7 +4,7 @@ import inspect
 from enum import Enum, IntEnum
 from typing import Union
 
-from src.color import STRING_COLORS
+from src.color import StringColor
 
 
 class LogLevel(IntEnum):
@@ -15,25 +15,24 @@ class LogLevel(IntEnum):
 
     @property
     def color(self):
-        return LogStringColor[f'{self.name}'].value
+        return LogStringColor[f"{self.name}"].value
 
 
 class LogStringColor(Enum):
-    DEBUG = STRING_COLORS.GREEN
-    INFO = STRING_COLORS.COLOR_DEFAULT
-    WARNING = STRING_COLORS.YELLOW
-    ERROR = STRING_COLORS.RED
+    DEBUG = StringColor.GREEN
+    INFO = StringColor.DEFAULT
+    WARNING = StringColor.YELLOW
+    ERROR = StringColor.RED
 
 
 class Log(object):
-    __RESET_COLOR = STRING_COLORS.RESET
+    __RESET_COLOR = StringColor.RESET
 
     def __init__(self, level: int = 1) -> None:
         try:
             self._level = LogLevel(level)
         except ValueError:
-            raise ValueError(
-                'level should be set to an integer between 0 and 3.')
+            raise ValueError("level should be set to an integer between 0 and 3.")
 
     @property
     def level(self):
@@ -44,11 +43,11 @@ class Log(object):
             log_level = LogLevel(log_level)
         if frame:
             function_name = inspect.getframeinfo(frame)[2]
-            console_msg = f'[{log_level.name}] {function_name} : {str(string)}'
+            console_msg = f"[{log_level.name}] {function_name} : {str(string)}"
         else:
-            console_msg = f'[{log_level.name}] {str(string)}'
-        if (log_level >= self.level):
-            print(f'{log_level.color}{console_msg}{self.__RESET_COLOR}')
+            console_msg = f"[{log_level.name}] {str(string)}"
+        if log_level >= self.level:
+            print(f"{log_level.color}{console_msg}{self.__RESET_COLOR}")
 
     def debug(self, string: str, frame=None) -> None:
         self.logger(string, LogLevel.DEBUG, frame)
