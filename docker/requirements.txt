@@ -4,10 +4,5 @@ numpy
 pandas
 matplotlib
 seaborn
-# jupyter
 ipywidgets
 jupyter-emacskeys
-autopep8
-black
-flake8
-pre-commit

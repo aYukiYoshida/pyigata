@@ -2,7 +2,7 @@
 import matplotlib._color_data as mcd
 import seaborn as sns
 
-from src.constant import ConstantMeta
+from pyigata.constant import ConstantMeta
 
 
 class StringColor(metaclass=ConstantMeta):

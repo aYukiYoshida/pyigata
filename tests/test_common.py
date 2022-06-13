@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+import io
+import sys
 import unittest
 
-from .context import Common, StringColor, io, sys
+from pyigata import Common
+from pyigata.color import StringColor
 
 
 class TestCommon(unittest.TestCase):

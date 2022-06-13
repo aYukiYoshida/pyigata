@@ -4,7 +4,7 @@ import inspect
 from enum import Enum, IntEnum
 from typing import Union
 
-from src.color import StringColor
+from pyigata.color import StringColor
 
 
 class LogLevel(IntEnum):

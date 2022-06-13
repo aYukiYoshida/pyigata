@@ -6,14 +6,14 @@ import pathlib
 import sys
 from argparse import ArgumentParser
 
-import src
+import pyigata
 
 SCRIPT_FILE_PATH = pathlib.Path(os.path.abspath(__file__))
 
 
 def get_logger(args):
     log_level = 0 if args.debug else args.log_level
-    return src.common.Common(log_level)
+    return pyigata.Common(log_level)
 
 
 def test_func(args):
@@ -28,7 +28,7 @@ def create_license_list(args):
     if args.target:
         logger.info(f"TARGET: {args.target}")
         logger.info(f"OUTPUT: {args.output}")
-        creator = src.LicenseListCreator(
+        creator = pyigata.LicenseListCreator(
             python_path=args.target, output_csv=args.output, log_level=args.log_level
         )
         creator()

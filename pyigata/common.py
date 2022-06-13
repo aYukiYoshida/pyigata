@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import os
 import sys
-from src.log import Log
+
+from pyigata.log import Log
 
 
 class Common(Log):
