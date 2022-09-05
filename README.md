@@ -1,10 +1,14 @@
 # PyIgata
 
+## Requirements
+
+- poetry
+
 ## 諸情報
 
 ### 環境設定
 
-* 仮想環境準備 ([公式ドキュメント](https://docs.python.org/ja/3/library/venv.html))
+- 旧仮想環境準備 ([公式ドキュメント](https://docs.python.org/ja/3/library/venv.html))
 
     ```bash
     % python3 -m venv venv
@@ -12,23 +16,29 @@
     % deactivate  # 仮想環境終了
     ```
 
+- with poetry
+
+    ```bash
+    % poetry install
+    ```
+
 #### docker command
 
-* build
+- build
 
     ```bash
     % docker build -t pyigata -f docker/Dockerfile.pyigata .
     ```
 
-* run
+- run
 
-  * run python script
+  - run python script
 
     ```bash
     % docker run [-i] [-t] --rm -v $PWD:/opt/src pyigata [ARGUMENT]
     ```
 
-  * run shell prompt
+  - run shell prompt
 
     ```bash
     % docker run [-i] [-t] --entrypoint /bin/bash --rm -v $PWD:/opt/src pyigata
@@ -38,37 +48,37 @@
 
 If you want to learn more about `setup.py` files, check out [this repository](https://github.com/kennethreitz/setup.py).
 
-* build
+- build
 
     ```bash
     % ./setup.py build
     ```
 
-* install
+- install
 
     ```bash
     % ./setup.py install
     ```
 
-* unit test
+- unit test
 
     ```bash
     % ./setup.py test
     ```
 
-* clean
+- clean
 
     ```bash
     % ./setup.py clean
     ```
 
-* check
+- check
 
     ```bash
     % ./setup.py check
     ```
 
-* generate package
+- generate package
 
     ```bash
     % ./setup.py sdist
@@ -97,25 +107,25 @@ If you want to learn more about `setup.py` files, check out [this repository](ht
 
 ### Run jupyter lab on docker
 
-* build
+- build
 
     ```bash
     % docker-compose build
     ```
 
-* run
+- run
 
     ```bash
     % docker-compose up -d
     ```
 
-* run shell
+- run shell
 
     ```bash
     % docker-compose exec -u root jupyternbenv bash -p
     ```
 
-* shutdown
+- shutdown
 
     ```bash
     % docker-compose down
