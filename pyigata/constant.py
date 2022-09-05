@@ -16,8 +16,8 @@ class Constant(object):
 
 
 class ConstantMeta(type):
-    def __init__(cls):
-        pass
+    def __new__(cls, clsname, bases, clsdict):
+        return super().__new__(cls, clsname, bases, clsdict)
 
     def __setattr__(cls, name, value):
         if name in cls.__dict__:
