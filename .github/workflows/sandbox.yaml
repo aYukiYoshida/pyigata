@@ -40,13 +40,13 @@ jobs:
           echo $FLAG_1
           echo $FLAG_2
           echo ${{inputs.option_1}}
-      - name: step 1
-        if: always() && (inputs.option_1 == 'any' || inputs.options_1 == 'foo')
+      - name: foo
+        if: always() && (inputs.option_1 == 'any' || inputs.option_1 == 'foo')
         run: |
           echo $FLAG_1
           echo "step 1"
-      - name: step 2
-        if: always() && (inputs.option_1 == 'any' || inputs.options_1 == 'bar')
+      - name: bar
+        if: always() && (inputs.option_1 == 'any' || inputs.option_1 == 'bar')
         run: |
           echo $FLAG_2
           echo "step 2"
