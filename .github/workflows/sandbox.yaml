@@ -16,6 +16,15 @@ on:
         description: flag 2
         required: true
         default: true
+      option_1:
+        type: choice
+        description: option 1
+        required: true
+        options:
+          - any
+          - foo
+          - bar
+        default: a
 
 jobs:
   sample:
@@ -26,12 +35,12 @@ jobs:
       FLAG_2: ${{ github.event.inputs.flag_2 }}
     steps:
       - name: step 1
-        if: always() && github.event.inputs.flag_1 == 'true'
+        if: always() && (inputs.option_1 == 'foo' || inputs.options_1 == 'any')
         run: |
           echo $FLAG_1
           echo "step 1"
       - name: step 2
-        if: always() && github.event.inputs.flag_2 == 'true'
+        if: always() && (inputs.option_1 == 'bar' || inputs.options_1 == 'any')
         run: |
           echo $FLAG_2
           echo "step 2"
