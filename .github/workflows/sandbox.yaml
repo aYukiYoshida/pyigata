@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: dispatched E2E testing (data-transfer)
+name: sandbox
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -8,12 +8,12 @@ on:
     inputs:
       flag_1:
         type: boolean
-        description: boolean flag
+        description: flag 1
         required: true
         default: true
       flag_2:
         type: boolean
-        description: boolean flag
+        description: flag 2
         required: true
         default: true
 
@@ -22,13 +22,16 @@ jobs:
     name: sandbox
     runs-on: ubuntu-latest
     env:
-      FLAG: ${{ github.event.inputs.flag }}
+      FLAG_1: ${{ github.event.inputs.flag_1 }}
+      FLAG_2: ${{ github.event.inputs.flag_2 }}
     steps:
       - name: step 1
         if: always() && github.event.inputs.flag_1 == 'true'
         run: |
+          echo $FLAG_1
           echo "step 1"
       - name: step 2
         if: always() && github.event.inputs.flag_2 == 'true'
         run: |
+          echo $FLAG_2
           echo "step 2"
