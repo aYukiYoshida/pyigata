@@ -31,7 +31,7 @@ jobs:
     name: sandbox
     runs-on: ubuntu-latest
     env:
-      FLAG_1: ${{ github.event.inputs.flag_1 }}
+      FLAG_1: ${{ inputs.flag_1 }}
       FLAG_2: ${{ github.event.inputs.flag_2 }}
     steps:
       - name: step 0
@@ -40,6 +40,10 @@ jobs:
           echo $FLAG_1
           echo $FLAG_2
           echo ${{inputs.option_1}}
+      - name: step 1
+        if: not ${{ inputs.flag_1 }}
+        run: |
+          echo $FLAG_1
       - name: foo
         if: always() && (inputs.option_1 == 'any' || inputs.option_1 == 'foo')
         run: |
