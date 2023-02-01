@@ -41,7 +41,7 @@ jobs:
           echo $FLAG_2
           echo ${{inputs.option_1}}
       - name: step 1
-        if: ${{ not inputs.flag_1 }}
+        if: ${{ ! inputs.flag_1 }}
         run: |
           echo $FLAG_1
       - name: foo
