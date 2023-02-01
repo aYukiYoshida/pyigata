@@ -32,8 +32,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FLAG_1: ${{ inputs.flag_1 }}
-      FLAG_2: ${{ github.event.inputs.flag_2 }}
+      FLAG_2: ${{ inputs.flag_2 }}
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          clean: ${{ ! inputs.flag_2 }}
       - name: step 0
         run: |
           echo "step 0"
