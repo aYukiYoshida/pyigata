@@ -14,4 +14,3 @@ Feature: BDD
         # When level=1のログの出力を実行する
 
         Then level=1のログが出力される
-

@@ -2,9 +2,7 @@
 
 import csv
 import os
-import sys
 from collections import deque
-from enum import Enum
 from typing import List, Union
 
 import pkg_resources
@@ -16,14 +14,10 @@ from .extend import ExtendDict
 class LicenseListCreator(Common):
     INFO_LABEL = ["name", "version", "license", "homepage"]
 
-    def __init__(
-        self, python_path: Union[str, List[str]], output_csv: str, log_level: int
-    ) -> None:
+    def __init__(self, python_path: Union[str, List[str]], output_csv: str, log_level: int) -> None:
         super().__init__(log_level)
         python_path = python_path
-        self.python_path: List[str] = (
-            python_path if isinstance(python_path, list) else [python_path]
-        )
+        self.python_path: List[str] = python_path if isinstance(python_path, list) else [python_path]
         self.output_csv = output_csv
 
     def __call__(self) -> None:
@@ -42,7 +36,7 @@ class LicenseListCreator(Common):
         for label in labels:
             for line in lines:
                 if line.startswith(label):
-                    license_ = line[len(label):]
+                    license_ = line[len(label) :]
                     break
         return license_
 
@@ -55,7 +49,7 @@ class LicenseListCreator(Common):
         label = "Home-page: "
         for line in lines:
             if line.startswith(label):
-                url = line[len(label):]
+                url = line[len(label) :]
                 break
         else:
             url = None

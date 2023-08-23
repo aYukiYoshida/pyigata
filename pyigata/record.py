@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 
 @dataclass
 class Record:
@@ -25,5 +27,5 @@ class Record:
         return self._record[i]
 
     @classmethod
-    def generate(cls, message: str, status:int) -> Record:
+    def generate(cls, message: str, status: int) -> Record:
         return cls([message], status)

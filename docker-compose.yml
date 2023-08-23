@@ -9,7 +9,7 @@ services:
     container_name: "jupyternbenv"
     volumes:
       - ./work:/home/jovyan/work
-      - ./src:/home/jovyan/work/src 
+      - ./src:/home/jovyan/work/src
     ports:
       - "8888:8888" # used by jupyter lab
     environment:

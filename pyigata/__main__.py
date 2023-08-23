@@ -28,9 +28,7 @@ def create_license_list(args):
     if args.target:
         logger.info(f"TARGET: {args.target}")
         logger.info(f"OUTPUT: {args.output}")
-        creator = pyigata.LicenseListCreator(
-            python_path=args.target, output_csv=args.output, log_level=args.log_level
-        )
+        creator = pyigata.LicenseListCreator(python_path=args.target, output_csv=args.output, log_level=args.log_level)
         creator()
     else:
         logger.error("Please input --target")
@@ -39,9 +37,7 @@ def create_license_list(args):
 
 def main():
     common_parser = ArgumentParser(description="parse common options.", add_help=False)
-    common_parser.add_argument(
-        "-d", "--debug", action="store_true", default=False, help="Run debug mode."
-    )
+    common_parser.add_argument("-d", "--debug", action="store_true", default=False, help="Run debug mode.")
     common_parser.add_argument(
         "-l",
         "--log-level",
@@ -57,9 +53,7 @@ def main():
 
     # for test
     subparser_test = subparsers.add_parser("test", parents=[common_parser])
-    subparser_test.add_argument(
-        "-n", "--name", type=str, default="Yuki Yoshida", help="Your name."
-    )
+    subparser_test.add_argument("-n", "--name", type=str, default="Yuki Yoshida", help="Your name.")
     subparser_test.add_argument(
         "-m",
         "--mode",

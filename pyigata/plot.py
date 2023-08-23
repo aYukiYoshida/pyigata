@@ -55,18 +55,11 @@ def configure_figure(
     width_ratios: List[float] = PlotProperty.GRID_RATIO_WIDTH,
     height_ratios: List[float] = PlotProperty.GRID_RATIO_HEIGHT,
 ) -> Tuple[Figure, Union[ndarray, Subplot]]:
-
     sharex_ = "col" if sharex else None
     sharey_ = "row" if sharey else None
-    if (
-        nrows > PlotProperty.ROWS_NUMBER
-        and height_ratios == PlotProperty.GRID_RATIO_HEIGHT
-    ):
+    if nrows > PlotProperty.ROWS_NUMBER and height_ratios == PlotProperty.GRID_RATIO_HEIGHT:
         height_ratios = PlotProperty.GRID_RATIO_HEIGHT * nrows
-    if (
-        ncols > PlotProperty.COLS_NUMBER
-        and width_ratios == PlotProperty.GRID_RATIO_WIDTH
-    ):
+    if ncols > PlotProperty.COLS_NUMBER and width_ratios == PlotProperty.GRID_RATIO_WIDTH:
         width_ratios = PlotProperty.GRID_RATIO_WIDTH * ncols
 
     fig, ax = plt.subplots(
@@ -78,9 +71,7 @@ def configure_figure(
         dpi=PlotProperty.DPI,
         gridspec_kw={"height_ratios": height_ratios, "width_ratios": width_ratios},
     )
-    fig.subplots_adjust(
-        left=left, right=right, bottom=bottom, top=top, wspace=wspace, hspace=hspace
-    )
+    fig.subplots_adjust(left=left, right=right, bottom=bottom, top=top, wspace=wspace, hspace=hspace)
     # grd = fig.add_gridspec(grid_num_v,grid_num_h)
     return fig, ax
 
@@ -112,12 +103,8 @@ class SimplePlot(object):
         self.colors = args.get("colors", PlotColor)
         self.sharex: bool = args.get("sharex", True)
         self.sharey: bool = args.get("sharey", True)
-        self.width_ratios: List = args.get(
-            "width_ratios", PlotProperty.GRID_RATIO_WIDTH
-        )
-        self.height_ratios: List = args.get(
-            "height_ratios", PlotProperty.GRID_RATIO_HEIGHT
-        )
+        self.width_ratios: List = args.get("width_ratios", PlotProperty.GRID_RATIO_WIDTH)
+        self.height_ratios: List = args.get("height_ratios", PlotProperty.GRID_RATIO_HEIGHT)
         if configure:
             self.configure()
 
