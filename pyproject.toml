@@ -33,6 +33,7 @@ line-length = 180
 
 [tool.ruff]
 line-length = 180
+ignore-init-module-imports = true
 
 [tool.isort]
 profile = "black"
