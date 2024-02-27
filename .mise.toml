@@ -1,0 +1,13 @@
+[tools]
+python = "3.10"
+poetry = "1.8.1"
+
+[tasks."setup:poetry"]
+run = "poetry install"
+
+[tasks."setup:pre-commit"]
+run = "poetry run pre-commit install"
+depends = ["setup:poetry"]
+
+[tasks.setup]
+depends = ["setup:poetry", "setup:pre-commit"]

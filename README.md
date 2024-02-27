@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- poetry
+- [mise](https://mise.jdx.dev/)
 
 ## 諸情報
 
@@ -16,10 +16,11 @@
     % deactivate  # 仮想環境終了
     ```
 
-- with poetry
+- with mise
 
     ```bash
-    % poetry install
+    % mise install
+    % mise run setup
     ```
 
 #### docker command
